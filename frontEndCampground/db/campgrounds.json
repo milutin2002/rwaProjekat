@@ -1,0 +1,3 @@
+{
+    "campgrounds":[{"id":1,"title":"camp1","content":"Sadrzaj 1","slika":"https://upload.wikimedia.org/wikipedia/commons/5/58/Izvir_temenice.JPG"},{"id":2,"title":"camp2","content":"Sadrzaj 2","slika":"https://upload.wikimedia.org/wikipedia/commons/5/58/Izvir_temenice.JPG"},{"id":3,"title":"camp3","content":"Sadrzaj 3","slika":"https://upload.wikimedia.org/wikipedia/commons/5/58/Izvir_temenice.JPG"}]
+}
