@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "api":	"json-server ./db/campgrounds.json --watch"
+    "api": "json-server ./db/campgrounds.json --watch"
   },
   "private": true,
   "dependencies": {
@@ -19,6 +19,9 @@
     "@angular/platform-browser": "^17.3.0",
     "@angular/platform-browser-dynamic": "^17.3.0",
     "@angular/router": "^17.3.0",
+    "@ngrx/effects": "^18.0.1",
+    "@ngrx/store": "^18.0.1",
+    "@ngrx/store-devtools": "^18.0.1",
     "json-server": "^1.0.0-beta.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
