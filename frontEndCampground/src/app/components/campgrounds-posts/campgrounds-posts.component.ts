@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { CampgroundService } from '../../../service/campground.service';
 import { campground } from '../../../models/campground';
 import { Observable, of } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { CampgroundState } from '../../store/campground/campground.reduce';
+import { selectCampgrounds } from '../../store/campground/campground.action';
 
 @Component({
   selector: 'app-campgrounds-posts',
@@ -10,10 +13,12 @@ import { Observable, of } from 'rxjs';
 })
 export class CampgroundsPostsComponent {
   campgrounds$:Observable<campground[]>=of([]);
-  constructor(private service:CampgroundService){
+  constructor(private service:CampgroundService,private store:Store<CampgroundState>){
     this.campgrounds$=service.getCampgrounds();
   }
-  selectCampground(campground:campground){
-    console.log(campground);
+  select(campgroundSelected:campground){
+    console.log("Poslao sam id");
+    console.log(campgroundSelected);
+    this.store.dispatch(selectCampgrounds({campground:campgroundSelected}));
   }
 }

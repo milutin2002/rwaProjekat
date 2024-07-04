@@ -9,9 +9,4 @@ import { campground } from '../../../models/campground';
 export class CampgroundPostComponent {
 @Input()campground: campground|null=null;
 @Output()onClick:EventEmitter<campground>=new EventEmitter<campground>();
- click(){
-  if(this.campground){
-    this.onClick.emit(this.campground);
-  }
-}
 }

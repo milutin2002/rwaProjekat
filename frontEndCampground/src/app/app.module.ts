@@ -7,15 +7,19 @@ import { CampgroundsPostsComponent } from './components/campgrounds-posts/campgr
 import { CampgroundPostComponent } from './components/campground-post/campground-post.component';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
-import {campgroundReducer} from './store/campground/campground.reduce';
+import {CampgroundState, campgroundReducer} from './store/campground/campground.reduce';
 import { CampgroundPartComponent } from './components/campground-part/campground-part.component'
+import { AppState } from './app.state';
+import { StoreDevtools, StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
     AppComponent,CampgroundsPostsComponent,CampgroundPostComponent, CampgroundPartComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule,HttpClientModule,StoreModule.forRoot({campgrounds:campgroundReducer})
+    AppRoutingModule,HttpClientModule,StoreModule.forRoot<AppState>({campgrounds:campgroundReducer}),StoreDevtoolsModule.instrument({
+      maxAge:25
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
