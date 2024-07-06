@@ -3,6 +3,8 @@ import { campground } from '../../../models/campground';
 import {CampgroundState} from '../../store/campground/campground.reduce'
 import { Store } from '@ngrx/store';
 import { AppState } from '../../app.state';
+import { selectCampgrounds } from '../../store/campground/campground.action';
+import { selectCampgroundObject } from '../../store/campground/campground.selection';
 @Component({
   selector: 'app-campground-part',
   templateUrl: './campground-part.component.html',
@@ -14,9 +16,12 @@ campground: campground | null=null;
 
   }
   ngOnInit(): void {
-    this.store.subscribe(x=>{
-      this.campground=x.campgrounds.selectCampground;
-      console.log(this.campground);
+    this.store.select(selectCampgroundObject).subscribe(x=>{
+      let c=x;
+      console.log(c);
+      if(c){
+        this.campground=c;
+      }
     });
   }
 }

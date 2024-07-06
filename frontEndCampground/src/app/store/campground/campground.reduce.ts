@@ -5,7 +5,7 @@ import { Action } from 'rxjs/internal/scheduler/Action';
 
 export interface CampgroundState{
     campgrounds:campground[],
-    selectCampground:campground | null
+    selectCampground:number | null
 };
 export const initialState:CampgroundState={
     campgrounds:[],
@@ -15,5 +15,10 @@ export const campgroundReducer=createReducer(initialState,on(Actions.selectCampg
     return {
         ...state,
         selectCampground:campground
+    }
+}),on(Actions.loadCampgroundsSuccess,(state,{campgrounds})=>{
+    return{
+        ...state,
+        campgrounds:campgrounds
     }
 }))

@@ -11,6 +11,8 @@ import {CampgroundState, campgroundReducer} from './store/campground/campground.
 import { CampgroundPartComponent } from './components/campground-part/campground-part.component'
 import { AppState } from './app.state';
 import { StoreDevtools, StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import { CampgroundEffects } from './store/campground/campground.effect';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,7 @@ import { StoreDevtools, StoreDevtoolsModule } from '@ngrx/store-devtools';
     BrowserModule,
     AppRoutingModule,HttpClientModule,StoreModule.forRoot<AppState>({campgrounds:campgroundReducer}),StoreDevtoolsModule.instrument({
       maxAge:25
-    })
+    }),EffectsModule.forRoot([CampgroundEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

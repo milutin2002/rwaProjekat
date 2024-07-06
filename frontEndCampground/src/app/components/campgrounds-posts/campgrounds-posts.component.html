@@ -1,5 +1,5 @@
 <div *ngFor="let campground of campgrounds$ | async">
-   <div (click)="select(campground)">
-   <app-campground-post [campground]="campground" (onClick)="select(campground)"></app-campground-post>
+   <div (click)="select(campground.id)">
+   <app-campground-post [campground]="campground"></app-campground-post>
 </div>
 </div>
