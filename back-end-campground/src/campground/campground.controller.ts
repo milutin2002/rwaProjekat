@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
 import { campgroundDto } from 'src/dtoEntites/campgroundDto';
 import { campground } from 'src/models/campground';
-import { CampgroundService } from 'src/service/campground.service';
+import { CampgroundService } from './campground.service';
 
 @Controller('campgrounds')
 export class CampgroundController {
