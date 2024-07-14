@@ -18,15 +18,17 @@ export class CampgroundController {
     @UseGuards(JwtAuthGuard)
     @Post()
     public createCampground(@Body()campgroundDto:campgroundDto,@Request() req){
-        return this.service.addCampground(campgroundDto,req.id);
+        return this.service.addCampground(campgroundDto,req.user.id);
         //return "Authorized";
     }
     @Put()
     public updateCampground(@Body()campground:campground){
         return this.service.updateCampground(campground);
     }
+    @UseGuards(JwtAuthGuard)
     @Delete(":id")
-    public delectCampground(@Param('id',ParseIntPipe)id:number){
-        return this.service.deleteCampground(id);
+    public delectCampground(@Param('id',ParseIntPipe)id:number,@Request()req){
+        console.log(req.user);
+        return this.service.deleteCampground(id,req.user.id);
     }
 }

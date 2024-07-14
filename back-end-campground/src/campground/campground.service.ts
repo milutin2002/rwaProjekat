@@ -1,5 +1,5 @@
 
-import {Get, Injectable, Param, ParseIntPipe} from '@nestjs/common'
+import {Get, Injectable, Param, ParseIntPipe, UnauthorizedException} from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm';
 import { campgroundDto } from 'src/dtoEntites/campgroundDto';
 import { campground } from 'src/models/campground';
@@ -13,17 +13,20 @@ export class CampgroundService {
   getCampgrounds(){
     return this.campgroundRepository.find();
   }
-  public getCampgroundById(id:number){
+  public async getCampgroundById(id:number){
     return this.campgroundRepository.findOneBy({"id":id});
   }
-  public async addCampground(campgroundDto:campgroundDto,username:string){
+  public async addCampground(campgroundDto:campgroundDto,id:number){
     const campgroundAdd=this.campgroundRepository.create(campgroundDto);
-    const userAdd=await this.userService.findOne(username);
-    campgroundAdd.user=userAdd;
+    campgroundAdd.userId=id;
     return await this.campgroundRepository.save(campgroundAdd);
   }
-  public async deleteCampground(id:number){
-    return await this.campgroundRepository.delete(id);
+  public async deleteCampground(id:number,idU:number){
+    const campgroundToDelete=await this.getCampgroundById(id);
+    if(campgroundToDelete.userId===idU){
+      return await this.campgroundRepository.delete(id);
+    }
+    throw new UnauthorizedException();
   }
   public async updateCampground(campground: campground) {
     await this.campgroundRepository.update(campground.id,campground);
