@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { campground } from "./campground";
 
 @Entity()
 export class user{
@@ -10,5 +11,6 @@ export class user{
     password:string
     @Column()
     profilePicture:string
-
+    @OneToMany(()=>campground,camp=>camp.user)
+    campgrounds:campground[]
 }

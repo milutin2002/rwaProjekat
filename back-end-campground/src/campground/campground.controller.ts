@@ -1,7 +1,8 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Request, UseGuards } from '@nestjs/common';
 import { campgroundDto } from 'src/dtoEntites/campgroundDto';
 import { campground } from 'src/models/campground';
 import { CampgroundService } from './campground.service';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('campgrounds')
 export class CampgroundController {
@@ -14,9 +15,11 @@ export class CampgroundController {
     public getCampgroundById(@Param('id',ParseIntPipe)id:number){
         return this.service.getCampgroundById(id);
     }
+    @UseGuards(JwtAuthGuard)
     @Post()
-    public createCampground(@Body()campgroundDto:campgroundDto){
-        return this.service.addCampground(campgroundDto);
+    public createCampground(@Body()campgroundDto:campgroundDto,@Request() req){
+        return this.service.addCampground(campgroundDto,req.id);
+        //return "Authorized";
     }
     @Put()
     public updateCampground(@Body()campground:campground){

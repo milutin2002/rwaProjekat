@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { user } from "./user";
 
 @Entity()
 export class campground{
@@ -10,4 +11,6 @@ export class campground{
     content:string;
     @Column()
     slika:string;
+    @ManyToOne(()=>user,(user)=>user.campgrounds)
+    user:user
 }
