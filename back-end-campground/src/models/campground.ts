@@ -1,5 +1,6 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { user } from "./user";
+import { comment } from "./comment";
 
 @Entity()
 export class campground{
@@ -16,4 +17,6 @@ export class campground{
     @ManyToOne(()=>user,(user)=>user.campgrounds)
     @JoinColumn({name:"userId"})
     user:user
+    @OneToMany(()=>comment,comment=>comment.user)
+    comments:comment[]
 }

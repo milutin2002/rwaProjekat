@@ -12,6 +12,9 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { user } from './models/user';
 import { UsersService } from './users/users.service';
+import { CommentController } from './comment/comment.controller';
+import { CommentService } from './comment/comment.service';
+import { comment } from './models/comment';
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -20,8 +23,8 @@ import { UsersService } from './users/users.service';
     imports: [ConfigModule],
     inject: [ConfigService],
     useFactory: typeOrmConfig,
-  }),TypeOrmModule.forFeature([campground,user]),ConfigModule.forRoot(), AuthModule, UsersModule],
-  controllers: [AppController, CampgroundController],
-  providers: [AppService,CampgroundService,UsersService],
+  }),TypeOrmModule.forFeature([campground,user,comment]),ConfigModule.forRoot(), AuthModule, UsersModule],
+  controllers: [AppController, CampgroundController, CommentController],
+  providers: [AppService,CampgroundService,UsersService, CommentService],
 })
 export class AppModule {}

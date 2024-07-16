@@ -1,5 +1,6 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { campground } from "./campground";
+import { comment } from "./comment";
 
 @Entity()
 export class user{
@@ -13,4 +14,6 @@ export class user{
     profilePicture:string
     @OneToMany(()=>campground,camp=>camp.user)
     campgrounds:campground[]
+    @OneToMany(()=>comment,comment=>comment.user)
+    comments:comment[]
 }
