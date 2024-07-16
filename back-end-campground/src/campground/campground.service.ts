@@ -13,6 +13,9 @@ export class CampgroundService {
   getCampgrounds(){
     return this.campgroundRepository.find();
   }
+  public async getCampgroundByUserId(id:number){
+    return this.campgroundRepository.findBy({"userId":id});
+  }
   public async getCampgroundById(id:number){
     return this.campgroundRepository.findOneBy({"id":id});
   }

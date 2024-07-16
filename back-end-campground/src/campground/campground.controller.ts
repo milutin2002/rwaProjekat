@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Request, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Request, UnauthorizedException, UseGuards } from '@nestjs/common';
 import { campgroundDto } from 'src/dtoEntites/campgroundDto';
 import { campground } from 'src/models/campground';
 import { CampgroundService } from './campground.service';
@@ -11,19 +11,25 @@ export class CampgroundController {
     public getCampgrounds(){
         return this.service.getCampgrounds();
     }
-    @Get(":id")
-    public getCampgroundById(@Param('id',ParseIntPipe)id:number){
-        return this.service.getCampgroundById(id);
+    @UseGuards(JwtAuthGuard)
+    @Get("myCampgrounds")
+    public getCampgroundById(@Request()req){
+        return this.service.getCampgroundByUserId(req.user.id);
     }
     @UseGuards(JwtAuthGuard)
     @Post()
     public createCampground(@Body()campgroundDto:campgroundDto,@Request() req){
         return this.service.addCampground(campgroundDto,req.user.id);
-        //return "Authorized";
     }
+    @UseGuards(JwtAuthGuard)
     @Put()
-    public updateCampground(@Body()campground:campground){
-        return this.service.updateCampground(campground);
+    public updateCampground(@Body()campground:campground,@Request() req){
+        console.log(campground);
+        console.log(req.user);
+        if(req.user.id===campground.userId){
+            return this.service.updateCampground(campground);
+        }
+        throw new UnauthorizedException();
     }
     @UseGuards(JwtAuthGuard)
     @Delete(":id")
