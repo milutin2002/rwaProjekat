@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="background"></div>
+    <img src="assets/logo.png" alt="logo" class="logo">
+    <mat-card class="karta">
+        <mat-card-header>
+            <mat-card-title>Ulogujte se</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <mat-form-field appearance="fill">
+                    <mat-label>Unesite E-mail</mat-label>
+                    <input matInput [(ngModel)]="username" id="email">
+                </mat-form-field>
+            </div>
+            <div class="form-group">
+                <label for="password">Pasvord</label>
+                <mat-form-field appearance="fill">
+                    <mat-label>Unesite Pasvord</mat-label>
+                    <input matInput type="password" class="sifra" [(ngModel)]="password" id="password">
+                </mat-form-field>
+            </div>
+            <div>
+                <button mat-raised-button (click)="login()" class="dugme">Ulogujte se!</button>
+            </div>
+            <mat-divider></mat-divider>
+        </mat-card-content>
+        <mat-card-content>
+            <p>Nemate nalog? <a routerLink="/registracija">Registrujte se!</a></p>
+        </mat-card-content>
+    </mat-card>
+</div>
