@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { UserService } from '../../../service/user-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -7,11 +9,14 @@ import { Component } from '@angular/core';
 })
 export class LoginComponent {
 login() {
-  
+  this.userService.login({username:this.username,password:this.password}).subscribe(x=>{
+      localStorage.setItem("jwtToken","Bearer "+x.access_token);
+      this.router.navigate(['main']);
+  })
 }
 password: string='';
 username: string='';
-constructor(){
+constructor(private userService:UserService,private router:Router){
   this.password='';
   this.username='';
 }
