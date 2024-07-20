@@ -15,6 +15,8 @@ import { UsersService } from './users/users.service';
 import { CommentController } from './comment/comment.controller';
 import { CommentService } from './comment/comment.service';
 import { comment } from './models/comment';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -23,7 +25,7 @@ import { comment } from './models/comment';
     imports: [ConfigModule],
     inject: [ConfigService],
     useFactory: typeOrmConfig,
-  }),TypeOrmModule.forFeature([campground,user,comment]),ConfigModule.forRoot(), AuthModule, UsersModule],
+  }),TypeOrmModule.forFeature([campground,user,comment]),ConfigModule.forRoot(), AuthModule, UsersModule,ServeStaticModule.forRoot({rootPath: join(__dirname, '..', 'public')})],
   controllers: [AppController, CampgroundController, CommentController],
   providers: [AppService,CampgroundService,UsersService, CommentService],
 })
