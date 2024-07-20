@@ -23,6 +23,9 @@ export class UserService{
       return this.httpClient.post<{"access_token":string}>("http://localhost:3000/auth/login",userDto);
   }
   getProfile(){
-    return this.httpClient.get<string>("http://localhost:3000/auth/profile");
+    return this.httpClient.get<user>("http://localhost:3000/auth/profile");
+  }
+  updateProfile(data:FormData){
+    return this.httpClient.put<user>("http://localhost:3000/users",data);
   }
 }

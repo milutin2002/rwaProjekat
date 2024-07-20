@@ -24,14 +24,18 @@ import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { AuthInterceptor } from './interceptor/interceptor';
+import { userReducer } from './store/user/user.reduce';
+import { UserEffects } from './store/user/user.effect';
+import { EditUserProfileComponent } from './components/edit-user-profile/edit-user-profile.component';
+import {MatDialogModule, matDialogAnimations} from '@angular/material/dialog';
 @NgModule({
   declarations: [
-    AppComponent,CampgroundsPostsComponent,CampgroundPostComponent, CampgroundPartComponent, RegisterComponent, LoginComponent, MainPageComponent],
+    AppComponent,CampgroundsPostsComponent,CampgroundPostComponent, CampgroundPartComponent, RegisterComponent, LoginComponent, MainPageComponent, EditUserProfileComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule,HttpClientModule,StoreModule.forRoot<AppState>({campgrounds:campgroundReducer}),StoreDevtoolsModule.instrument({
+    AppRoutingModule,HttpClientModule,StoreModule.forRoot<AppState>({campgrounds:campgroundReducer,user:userReducer}),StoreDevtoolsModule.instrument({
       maxAge:25
-    }),EffectsModule.forRoot([CampgroundEffects]),MatCardModule,MatFormFieldModule,MatDividerModule,FormsModule,MatInputModule,MatButtonModule,ReactiveFormsModule,BrowserAnimationsModule
+    }),EffectsModule.forRoot([CampgroundEffects,UserEffects]),MatCardModule,MatFormFieldModule,MatDividerModule,FormsModule,MatInputModule,MatButtonModule,ReactiveFormsModule,BrowserAnimationsModule,MatDialogModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

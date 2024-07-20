@@ -4,7 +4,7 @@ import { userDto } from 'src/dtoEntites/userDto';
 import { user } from 'src/models/user';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
-import passport from 'passport';
+import passport, { use } from 'passport';
 
 @Injectable()
 export class UsersService {
@@ -20,5 +20,9 @@ export class UsersService {
         const user=this.userRepository.create({username:userDto.username,password:password,profilePicture:"defaultPicture.jpg"});
         const savedUser=await this.userRepository.save(user);
         return {id:savedUser.id,username:savedUser.username,profilePicture:savedUser.profilePicture};
+    }
+    public async updateUser(user:any){
+        await this.userRepository.update(user.id,user);
+        return this.userRepository.findOneBy({"id":user.id});
     }
 }

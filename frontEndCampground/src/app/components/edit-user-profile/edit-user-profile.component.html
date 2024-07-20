@@ -1,0 +1,15 @@
+<mat-dialog-content class="dialog">
+    <h3 class="header">Editovanje profila</h3>
+    <div>
+        <img [src]="data.profilePicture" alt="Profile Picture" class="preview-image">
+        <input #fileInput type="file" accept="image/*" style="display: none" (change)="onFileSelected($event)">
+    </div>
+    <button mat-raised-button class="button" (click)="fileInput.click()">Izaberite sliku</button>
+    <mat-form-field>
+        <input matInput placeholder="Username" [(ngModel)]="data.username">
+    </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-raised-button (click)="closeDialog()" color="accent">Izađite</button>
+    <button mat-raised-button (click)="editujProfil()" class="save">Sačuvajte promene</button>
+</mat-dialog-actions>
