@@ -3,7 +3,7 @@ import { campgroundDto } from 'src/dtoEntites/campgroundDto';
 import { campground } from 'src/models/campground';
 import { CampgroundService } from './campground.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { AnyFilesInterceptor } from '@nestjs/platform-express';
+import { AnyFilesInterceptor, FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { multerOptions } from 'src/MultiFileTypeValidator';
 import { ImageService } from 'src/image/image.service';
 
@@ -20,10 +20,11 @@ export class CampgroundController {
         return this.service.getCampgroundByUserId(req.user.id);
     }
     @UseGuards(JwtAuthGuard)
-    @UseInterceptors(AnyFilesInterceptor(multerOptions))
+    @UseInterceptors(FilesInterceptor('files',6,multerOptions))
     @Post()
     public async createCampground(@Body()campgroundDto:campgroundDto,@Request() req,@UploadedFiles() files: Array<Express.Multer.File>){
         const campgroundAdd:campground=await this.service.addCampground(campgroundDto,req.user.id);
+        console.log(files);
         const images=await this.imageServie.saveImages(files,campgroundAdd.id);
         campgroundAdd.images=images;
         return campgroundAdd;

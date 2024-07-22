@@ -11,8 +11,6 @@ export class campground{
     title:string;
     @Column()
     content:string;
-    @Column()
-    slika:string;
     @Column("int", { nullable: true })
     userId: number;
     @ManyToOne(()=>user,(user)=>user.campgrounds)

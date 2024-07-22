@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { AppState } from '../../app.state';
+import { Store } from '@ngrx/store';
+import { addCampground } from '../../store/campground/campground.action';
 
 @Component({
   selector: 'app-edit-add-campground',
@@ -7,8 +10,15 @@ import { Component } from '@angular/core';
 })
 export class EditAddCampgroundComponent {
   postaviOglas() {
-
+    const formData=new FormData();
+    formData.append("title",this.title);
+    formData.append("content",this.content);
+    for (let i = 0; i < this.selectedFiles.length; i++) {
+      formData.append("files",this.selectedFiles[i].file);
+    }
+    this.store.dispatch(addCampground({formData:formData}));
   }
+  constructor(private store:Store<AppState>){}
   selectedFiles: any[] = [];
   title: string='';
   content: string='';

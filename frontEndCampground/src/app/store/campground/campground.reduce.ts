@@ -1,4 +1,4 @@
-import {createReducer,on} from '@ngrx/store';
+import {createReducer,on, UPDATE} from '@ngrx/store';
 import { campground } from '../../../models/campground';
 import * as Actions from './campground.action';
 import { Action } from 'rxjs/internal/scheduler/Action';
@@ -22,4 +22,6 @@ export const campgroundReducer=createReducer(initialState,on(Actions.selectCampg
     }
 }),on(Actions.loadCampgroundsSuccess,(state,{campgrounds})=>{
     return adapter.setAll(campgrounds,state);
+}),on(Actions.addCampgroundSuccess,(state,{campground})=>{
+    return adapter.addOne(campground,state);
 }))

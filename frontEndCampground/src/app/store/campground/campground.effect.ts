@@ -9,4 +9,5 @@ export class CampgroundEffects{
 
     }
     loadCampgrounds=createEffect(()=>this.actions$.pipe(ofType(CampgroundActions.loadCampgrounds),mergeMap(()=>this.campgroundService.getCampgrounds().pipe(map((camps)=>CampgroundActions.loadCampgroundsSuccess({campgrounds:camps}))))))
+    addCampground=createEffect(()=>this.actions$.pipe(ofType(CampgroundActions.addCampground),mergeMap((d)=>this.campgroundService.addCampground(d.formData).pipe(map((camp)=>CampgroundActions.addCampgroundSuccess({campground:camp}))))))
 }
