@@ -1,6 +1,7 @@
 
 import {Get, Injectable, Param, ParseIntPipe, UnauthorizedException} from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm';
+import { RelationshipType } from 'sequelize/types/errors/database/foreign-key-constraint-error';
 import { campgroundDto } from 'src/dtoEntites/campgroundDto';
 import { campground } from 'src/models/campground';
 import { image } from 'src/models/image';
@@ -10,12 +11,16 @@ import { Repository } from 'typeorm';
 @Injectable()
 export class CampgroundService {
   
-  constructor(@InjectRepository(campground) private campgroundRepository:Repository<campground>,@InjectRepository(image)private imageRepository:Repository<image>){}
+  constructor(@InjectRepository(campground) private campgroundRepository:Repository<campground>){}
   getCampgrounds(){
     return this.campgroundRepository.find();
   }
   public async getCampgroundByUserId(id:number){
-    return this.campgroundRepository.findBy({"userId":id});
+    return this.campgroundRepository.find({relations:{
+      images:true
+    },where:{
+      userId:id
+    }});
   }
   public async getCampgroundById(id:number){
     return this.campgroundRepository.findOneBy({"id":id});
