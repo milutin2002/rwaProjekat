@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { user } from '../../../models/user';
 import { MatDialog } from '@angular/material/dialog';
 import { EditUserProfileComponent } from '../edit-user-profile/edit-user-profile.component';
+import { EditAddCampgroundComponent } from '../edit-add-campground/edit-add-campground.component';
 
 @Component({
   selector: 'app-main-page',
@@ -14,6 +15,9 @@ import { EditUserProfileComponent } from '../edit-user-profile/edit-user-profile
   styleUrl: './main-page.component.css'
 })
 export class MainPageComponent {
+  addDialog() {
+    this.dialog.open(EditAddCampgroundComponent);
+  }
   user:user | null=null;
   constructor(private store:Store<AppState>,private dialog: MatDialog){
     this.store.dispatch(loadUser());
@@ -25,6 +29,6 @@ export class MainPageComponent {
     })
   }
   openDialog(){
-    this.dialog.open(EditUserProfileComponent,{data:this.user});
+    this.dialog.open(EditUserProfileComponent,{data:{...this.user}});
   }
 }

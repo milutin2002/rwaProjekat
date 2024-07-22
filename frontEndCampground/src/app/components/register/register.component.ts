@@ -1,19 +1,21 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../../service/user-service.service';
+import { debounce, debounceTime, filter, fromEvent, map, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
-export class RegisterComponent {
+export class RegisterComponent implements AfterViewInit{
   pas: any;
   username:string='';
   passwordLengthValid: boolean = false;
   passwordHasNumber: boolean = false;
   passwordHasCapital: boolean = false;
+  doubleUsername:boolean=false;
   checkPassword() {
     const lengthRegex = /^.{8,20}$/;
     const numberRegex = /\d/;
@@ -24,12 +26,23 @@ export class RegisterComponent {
     this.passwordHasCapital = capitalLetterRegex.test(this.pas);
   }
   
-  constructor(private router: Router,private service:UserService) {}
+  constructor(private router: Router,private service:UserService) {
+    
+  }
+  ngAfterViewInit(): void {
+    var doc=document.getElementsByClassName('username');
+    if(doc){
+    fromEvent(doc,'input').pipe(debounceTime(500),map((ev:Event)=>(<HTMLInputElement>ev.target).value),filter(x=>x.length>0),switchMap(x=>this.service.doubleUsername(x))).subscribe(x=>{
+        this.doubleUsername=x;
+        console.log(x);
+    })
+    }
+  }
 
   usernameFormControl = new FormControl('', [Validators.required]);
 
   isFormValid(): boolean {
-    return this.usernameFormControl.valid && this.passwordLengthValid && this.passwordHasNumber && this.passwordHasCapital;
+    return this.usernameFormControl.valid && this.passwordLengthValid && this.passwordHasNumber && this.passwordHasCapital && this.doubleUsername;
   }
 
   navigateToNext() {

@@ -6,10 +6,13 @@
     </div>
     <button mat-raised-button class="button" (click)="fileInput.click()">Izaberite sliku</button>
     <mat-form-field>
-        <input matInput placeholder="Username" [(ngModel)]="data.username">
+        <input matInput placeholder="Username" class="username" [(ngModel)]="data.username">
+        @if (isValid()){
+            <mat-error *ngIf="isValid()">Username koji ne postoji je <strong>neophodan</strong></mat-error>
+        }
     </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-raised-button (click)="closeDialog()" color="accent">Izađite</button>
-    <button mat-raised-button (click)="editujProfil()" class="save">Sačuvajte promene</button>
+    <button mat-raised-button (click)="editujProfil()" [disabled]="!isValid()" class="save">Sačuvajte promene</button>
 </mat-dialog-actions>

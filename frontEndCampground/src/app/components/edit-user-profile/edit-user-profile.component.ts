@@ -1,23 +1,29 @@
-import { Component, Inject } from '@angular/core';
+import { AfterViewInit, Component, Inject } from '@angular/core';
 import { MainPageComponent } from '../main-page/main-page.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { user } from '../../../models/user';
 import { AppState } from '../../app.state';
 import { Store } from '@ngrx/store';
 import { updateUser } from '../../store/user/user.action';
+import { debounceTime, filter, fromEvent, map, switchMap } from 'rxjs';
+import { UserService } from '../../../service/user-service.service';
 
 @Component({
   selector: 'app-edit-user-profile',
   templateUrl: './edit-user-profile.component.html',
   styleUrl: './edit-user-profile.component.css'
 })
-export class EditUserProfileComponent {
+export class EditUserProfileComponent implements AfterViewInit {
 selectedFile: any;
 editujProfil() {
   const formData=new FormData();
   formData.append('username',this.data.username);
   formData.append('file',this.selectedFile);
   this.store.dispatch(updateUser({data:formData}));
+}
+doubleUsername:boolean=false;
+isValid():boolean{
+  return this.doubleUsername;
 }
 closeDialog() {
   this.dialogRef.close();
@@ -44,6 +50,15 @@ onFileSelected($event: any) {
 }
   constructor(
     public dialogRef: MatDialogRef<MainPageComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: user,private store:Store<AppState>
+    @Inject(MAT_DIALOG_DATA) public data: user,private store:Store<AppState>,private service:UserService
   ) {}
+  ngAfterViewInit(): void {
+    var doc=document.getElementsByClassName('username');
+    if(doc){
+    fromEvent(doc,'input').pipe(debounceTime(500),map((ev:Event)=>(<HTMLInputElement>ev.target).value),filter(x=>x.length>0),switchMap(x=>this.service.doubleUsername(x))).subscribe(x=>{
+        this.doubleUsername=x;
+        console.log(x);
+    })
+    }
+  }
 }

@@ -28,9 +28,10 @@ import { userReducer } from './store/user/user.reduce';
 import { UserEffects } from './store/user/user.effect';
 import { EditUserProfileComponent } from './components/edit-user-profile/edit-user-profile.component';
 import {MatDialogModule, matDialogAnimations} from '@angular/material/dialog';
+import { EditAddCampgroundComponent } from './components/edit-add-campground/edit-add-campground.component';
 @NgModule({
   declarations: [
-    AppComponent,CampgroundsPostsComponent,CampgroundPostComponent, CampgroundPartComponent, RegisterComponent, LoginComponent, MainPageComponent, EditUserProfileComponent],
+    AppComponent,CampgroundsPostsComponent,CampgroundPostComponent, CampgroundPartComponent, RegisterComponent, LoginComponent, MainPageComponent, EditUserProfileComponent, EditAddCampgroundComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,HttpClientModule,StoreModule.forRoot<AppState>({campgrounds:campgroundReducer,user:userReducer}),StoreDevtoolsModule.instrument({

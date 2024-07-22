@@ -3,13 +3,14 @@ import {Get, Injectable, Param, ParseIntPipe, UnauthorizedException} from '@nest
 import { InjectRepository } from '@nestjs/typeorm';
 import { campgroundDto } from 'src/dtoEntites/campgroundDto';
 import { campground } from 'src/models/campground';
+import { image } from 'src/models/image';
 import { UsersService } from 'src/users/users.service';
 import { Repository } from 'typeorm';
 
 @Injectable()
 export class CampgroundService {
   
-  constructor(@InjectRepository(campground) private campgroundRepository:Repository<campground>,private userService:UsersService){}
+  constructor(@InjectRepository(campground) private campgroundRepository:Repository<campground>,@InjectRepository(image)private imageRepository:Repository<image>){}
   getCampgrounds(){
     return this.campgroundRepository.find();
   }

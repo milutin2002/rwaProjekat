@@ -2,13 +2,14 @@
     <mat-card-content class="dole">
         <p>E-mail adresa</p>
         <mat-form-field>
-            <input matInput type="text" [formControl]="usernameFormControl" [(ngModel)]="username">
+            <input matInput type="text" class="username" [formControl]="usernameFormControl" [(ngModel)]="username">
             @if (usernameFormControl.hasError('email') && !usernameFormControl.hasError('required')) {
             <mat-error *ngIf="usernameFormControl.hasError('email') && !usernameFormControl.hasError('required')">Unesite valian E-mail</mat-error>
             }
             @if (usernameFormControl.hasError('required')) {
             <mat-error *ngIf="usernameFormControl.hasError('required')">Username je <strong>neophodan</strong></mat-error>
             }
+            <mat-error *ngIf="!doubleUsername">Username koji ne postoji je <strong>neophodan</strong></mat-error>
         </mat-form-field>
         <p>Lozinka</p>
         <mat-form-field>

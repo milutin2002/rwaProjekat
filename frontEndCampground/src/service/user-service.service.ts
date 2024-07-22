@@ -14,7 +14,7 @@ export class UserService{
       }
       return null;
   }
-
+  
   constructor(private httpClient:HttpClient) { }
   register(userDto:userDto):Observable<user>{
       return this.httpClient.post<user>("http://localhost:3000/users/register",userDto);
@@ -27,5 +27,8 @@ export class UserService{
   }
   updateProfile(data:FormData){
     return this.httpClient.put<user>("http://localhost:3000/users",data);
+  }
+  doubleUsername(username:string):Observable<boolean>{
+      return this.httpClient.get<boolean>("http://localhost:3000/users/"+username);
   }
 }

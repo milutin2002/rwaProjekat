@@ -18,6 +18,7 @@ import { comment } from './models/comment';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { MulterModule } from '@nestjs/platform-express';
+import { image } from './models/image';
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -26,7 +27,7 @@ import { MulterModule } from '@nestjs/platform-express';
     imports: [ConfigModule],
     inject: [ConfigService],
     useFactory: typeOrmConfig,
-  }),TypeOrmModule.forFeature([campground,user,comment]),ConfigModule.forRoot(), AuthModule, UsersModule,ServeStaticModule.forRoot({rootPath: join(__dirname, '..', 'public')}),MulterModule.register({dest:"../public"})],
+  }),TypeOrmModule.forFeature([campground,user,comment,image]),ConfigModule.forRoot(), AuthModule, UsersModule,ServeStaticModule.forRoot({rootPath: join(__dirname, '..', 'public')}),MulterModule.register({dest:"../public"})],
   controllers: [AppController, CampgroundController, CommentController],
   providers: [AppService,CampgroundService,UsersService, CommentService],
 })

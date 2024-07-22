@@ -14,6 +14,9 @@ export class UsersService {
     public async findOne(username:string):Promise<user | null>{
         return this.userRepository.findOneBy({username:username});
     }
+    public async findById(id:number){
+        return this.userRepository.findOneBy({id:id});
+    }
     public async registerUser(userDto:userDto){
         const saltRounds=10;
         const password=await bcrypt.hash(userDto.password,saltRounds);
@@ -24,5 +27,9 @@ export class UsersService {
     public async updateUser(user:any){
         await this.userRepository.update(user.id,user);
         return this.userRepository.findOneBy({"id":user.id});
+    }
+    public async doubleUsername(username:string){
+        const user=await this.userRepository.findOneBy({"username":username});
+        return user===null;
     }
 }

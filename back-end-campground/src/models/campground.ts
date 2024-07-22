@@ -1,6 +1,7 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { user } from "./user";
 import { comment } from "./comment";
+import { image } from "./image";
 
 @Entity()
 export class campground{
@@ -19,4 +20,6 @@ export class campground{
     user:user
     @OneToMany(()=>comment,comment=>comment.user)
     comments:comment[]
+    @OneToMany(()=>image,i=>i.campground)
+    images:image[]
 }
