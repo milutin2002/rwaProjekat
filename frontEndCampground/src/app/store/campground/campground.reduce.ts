@@ -24,4 +24,6 @@ export const campgroundReducer=createReducer(initialState,on(Actions.selectCampg
     return adapter.setAll(campgrounds,state);
 }),on(Actions.addCampgroundSuccess,(state,{campground})=>{
     return adapter.addOne(campground,state);
-}))
+}),on(Actions.deleteCampgroundSuccess,(state,{id})=>{
+    return adapter.removeOne(id,state);
+}));

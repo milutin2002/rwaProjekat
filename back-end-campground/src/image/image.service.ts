@@ -16,4 +16,7 @@ export class ImageService {
         }
         return Promise.all(images);
     }
+    public async deleteImages(campId:number){
+        return this.imageRepository.delete({"campgroundId":campId});
+    }
 }

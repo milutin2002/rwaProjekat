@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AppState } from '../../app.state';
 import { Store } from '@ngrx/store';
 import { addCampground } from '../../store/campground/campground.action';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-edit-add-campground',
@@ -17,8 +18,9 @@ export class EditAddCampgroundComponent {
       formData.append("files",this.selectedFiles[i].file);
     }
     this.store.dispatch(addCampground({formData:formData}));
+    this.dialogRef.close();
   }
-  constructor(private store:Store<AppState>){}
+  constructor(private store:Store<AppState>,public dialogRef: MatDialogRef<EditAddCampgroundComponent>){}
   selectedFiles: any[] = [];
   title: string='';
   content: string='';

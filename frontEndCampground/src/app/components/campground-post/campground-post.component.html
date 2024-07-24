@@ -1,11 +1,11 @@
-<li class="oglas-item">
-    <img *ngIf="campground?.images?.length && campground?.images?.at(0)" [src]="imageUrl + campground?.images?.at(0)?.fileName" alt="{{campground?.title}}" class="oglas-image" />
+<li class="oglas-item" *ngIf="campground">
+    <img *ngIf="campground?.images?.length && campground?.images?.at(0)" [src]="imageUrl + campground.images.at(0)?.fileName" alt="{{campground.title}}" class="oglas-image" />
     <div class="oglas-text">
-      <span class="oglas-title" (click)="selectCampground(campground?.id)">{{campground?.title}}</span>
-      <span class="oglas-content">{{campground?.content | slice:0:80}}<span *ngIf="campground?.content?.length! > 50"
+      <span class="oglas-title" (click)="selectCampground(campground.id)">{{campground.title}}</span>
+      <span class="oglas-content">{{campground.content | slice:0:80}}<span *ngIf="campground?.content?.length! > 50"
         class="fade-out"></span>...</span>
       <div class="buttons-container">
-        <button mat-raised-button class="button-levo" color="accent"
+        <button mat-raised-button class="button-levo" (click)="deleteCampground(campground.id)" color="accent"
           >Izbrišite</button>
         <button mat-raised-button class="button-desno" >Editujte</button>
       </div>

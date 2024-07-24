@@ -27,10 +27,7 @@ export class CampgroundController {
         console.log(files);
         const images=await this.imageServie.saveImages(files,campgroundAdd.id);
         campgroundAdd.images=images;
-        const campgroundReturn:any=campgroundAdd;
-        campgroundReturn.images=campgroundReturn.images.map(b=>"http://localhost:3000/"+b.fileName);
-        console.log(campgroundReturn);
-        return campgroundReturn;
+        return campgroundAdd;
     }
     @UseGuards(JwtAuthGuard)
     @Put()
@@ -46,6 +43,7 @@ export class CampgroundController {
     @Delete(":id")
     public async delectCampground(@Param('id',ParseIntPipe)id:number,@Request()req){
         console.log(req.user);
+        await this.imageServie.deleteImages(id);
         await this.service.deleteCampground(id,req.user.id);
         return id;
     }

@@ -17,4 +17,7 @@ export class CampgroundService {
   addCampground(formData:FormData):Observable<campground>{
     return this.httpClient.post<campground>("http://localhost:3000/campgrounds/",formData);
   }
+  deleteCampground(id:number):Observable<number>{
+    return this.httpClient.delete<number>("http://localhost:3000/campgrounds/"+id);
+  }
 }
