@@ -12,7 +12,7 @@ export class CampgroundService {
 
    }
   getCampgrounds():Observable<campground[]>{
-    return this.httpClient.get<campground[]>("http://localhost:3000/campgrounds");
+    return this.httpClient.get<campground[]>("http://localhost:3000/campgrounds/myCampgrounds");
   }
   addCampground(formData:FormData):Observable<campground>{
     return this.httpClient.post<campground>("http://localhost:3000/campgrounds/",formData);

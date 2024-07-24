@@ -1,3 +1,13 @@
-<h1>{{campground?.title}}</h1>
-<p>{{campground?.content}}</p>
-
+<mat-divider></mat-divider>
+<div class="center-container">
+    <div class="cards-container">
+      <mat-card *ngIf="campground && campground.images && campground.images.length>0" class="custom-card">
+        <div class="slideshow-container">
+          <button class="prev" (click)="prevImage()">&#10094;</button>
+          <img class="slide" *ngFor="let image of campground.images; let i = index" [src]="'http://localhost:3000/'+image.fileName"
+            [style.display]="i === currentSlideIndex ? 'block' : 'none'">
+          <button class="next" (click)="nextImage()">&#10095;</button>
+        </div>
+        <h2>{{ campground.title }}</h2>
+        <mat-divider></mat-divider>
+        <p class="oglas-content">{{ campground.content }}</p>

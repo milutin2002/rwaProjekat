@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { campground } from '../../../models/campground';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../app.state';
+import { selectCampgrounds } from '../../store/campground/campground.action';
 
 @Component({
   selector: 'app-campground-post',
@@ -7,6 +10,12 @@ import { campground } from '../../../models/campground';
   styleUrl: './campground-post.component.scss'
 })
 export class CampgroundPostComponent {
+  constructor(private store:Store<AppState>){}
 @Input()campground: campground|null=null;
-@Output()onClick:EventEmitter<campground>=new EventEmitter<campground>();
+imageUrl:string="http://localhost:3000/";
+  selectCampground(id:number | undefined){
+    if(id){
+      this.store.dispatch(selectCampgrounds({campground:id}));
+    }
+  }
 }

@@ -13,17 +13,20 @@ export class CampgroundService {
   
   constructor(@InjectRepository(campground) private campgroundRepository:Repository<campground>){}
   getCampgrounds(){
-    return this.campgroundRepository.find();
+    return this.campgroundRepository.find({relations:{images:true}});
   }
   public async getCampgroundByUserId(id:number){
-    return this.campgroundRepository.find({relations:{
+    const res=await this.campgroundRepository.find({relations:{
       images:true
     },where:{
       userId:id
     }});
+    console.log(res);
+    return res; 
   }
   public async getCampgroundById(id:number){
-    return this.campgroundRepository.findOneBy({"id":id});
+    const res=await this.campgroundRepository.findOneBy({"id":id});
+    return res;
   }
   public async addCampground(campgroundDto:campgroundDto,id:number){
     const campgroundAdd=this.campgroundRepository.create(campgroundDto);

@@ -12,6 +12,18 @@ import { selectCampgroundObject } from '../../store/campground/campground.select
 })
 export class CampgroundPartComponent implements OnInit{
 campground: campground | null=null;
+currentSlideIndex: number = 0;
+prevImage() {
+  if (this.campground?.images?.length) {
+    this.currentSlideIndex = (this.currentSlideIndex - 1 + this.campground.images.length) % this.campground.images.length;
+  }
+}
+
+nextImage() {
+  if (this.campground?.images.length) {
+    this.currentSlideIndex = (this.currentSlideIndex + 1) % this.campground.images.length;
+  }
+}
   constructor(private store:Store<AppState>){
 
   }
@@ -20,6 +32,7 @@ campground: campground | null=null;
       let c=x;
       console.log(c);
       if(c){
+        this.currentSlideIndex=0;
         this.campground=c;
       }
     });

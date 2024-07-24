@@ -1,5 +1,12 @@
-<div *ngFor="let campground of campgrounds$ | async">
+<!--<div *ngFor="let campground of campgrounds$ | async">
    <div (click)="select(campground.id)">
    <app-campground-post [campground]="campground"></app-campground-post>
 </div>
-</div>
+</div>-->
+<mat-card-content>
+   <ul>
+     <ng-container *ngFor="let campground of campgrounds$ | async">
+      <app-campground-post [campground]="campground"></app-campground-post>
+     </ng-container>
+   </ul>
+ </mat-card-content>
