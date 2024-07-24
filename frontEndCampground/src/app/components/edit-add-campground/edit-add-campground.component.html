@@ -19,7 +19,9 @@
   </button>
   <input type="file" #fileInput multiple (change)="onFilesSelected($event)" style="display: none;">
 </div>
-
+<div class="image-preview" *ngIf="pictures.length > 0">
+  <img *ngFor="let picture of pictures" [src]="'http://localhost:3000/' + picture " alt="Selected image" class="preview-image">
+</div>
 <div class="image-preview" *ngIf="selectedFiles.length > 0">
   <img *ngFor="let file of selectedFiles" [src]="file.url" alt="Selected image" class="preview-image">
 </div>

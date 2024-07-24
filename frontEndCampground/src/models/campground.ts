@@ -4,5 +4,6 @@ export interface campground{
     id:number,
     title:string,
     content:string,
-    images:images[]
+    images:images[],
+    userId:number
 }

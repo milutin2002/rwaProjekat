@@ -16,7 +16,7 @@ import { EditAddCampgroundComponent } from '../edit-add-campground/edit-add-camp
 })
 export class MainPageComponent {
   addDialog() {
-    this.dialog.open(EditAddCampgroundComponent);
+    this.dialog.open(EditAddCampgroundComponent,{data:null});
   }
   user:user | null=null;
   constructor(private store:Store<AppState>,private dialog: MatDialog){

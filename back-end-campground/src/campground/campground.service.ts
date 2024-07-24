@@ -3,6 +3,7 @@ import {Get, Injectable, Param, ParseIntPipe, UnauthorizedException} from '@nest
 import { InjectRepository } from '@nestjs/typeorm';
 import { RelationshipType } from 'sequelize/types/errors/database/foreign-key-constraint-error';
 import { campgroundDto } from 'src/dtoEntites/campgroundDto';
+import { updateCampgroundDto } from 'src/dtoEntites/updateCampgroundDto';
 import { campground } from 'src/models/campground';
 import { image } from 'src/models/image';
 import { UsersService } from 'src/users/users.service';
@@ -40,8 +41,10 @@ export class CampgroundService {
     }
     throw new UnauthorizedException();
   }
-  public async updateCampground(campground: campground) {
-    await this.campgroundRepository.update(campground.id,campground);
-    return this.campgroundRepository.findOneBy({"id":campground.id});
+  public async updateCampground(campground: updateCampgroundDto) {
+    await this.campgroundRepository.update(parseInt(campground.id),{...campground,userId:parseInt(campground.userId),id:parseInt(campground.id)});
+    return this.campgroundRepository.find({where:{"id":parseInt(campground.id)},relations:{
+      images:true
+    },take:1});
   }
 }

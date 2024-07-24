@@ -6,6 +6,7 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AnyFilesInterceptor, FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { multerOptions } from 'src/MultiFileTypeValidator';
 import { ImageService } from 'src/image/image.service';
+import { updateCampgroundDto } from 'src/dtoEntites/updateCampgroundDto';
 
 @Controller('campgrounds')
 export class CampgroundController {
@@ -30,11 +31,13 @@ export class CampgroundController {
         return campgroundAdd;
     }
     @UseGuards(JwtAuthGuard)
+    @UseInterceptors(FilesInterceptor('files',6,multerOptions))
     @Put()
-    public updateCampground(@Body()campground:campground,@Request() req){
-        console.log(campground);
-        console.log(req.user);
-        if(req.user.id===campground.userId){
+    public async updateCampground(@Body()campground:updateCampgroundDto,@Request() req,@UploadedFiles() files: Array<Express.Multer.File>){
+        console.log(campground.userId);
+        if(req.user.id==campground.userId){
+            const images=await this.imageServie.saveImages(files,parseInt(campground.userId));
+            //await this.imageServie.deleteSelectedImages(campground.deletedImages);
             return this.service.updateCampground(campground);
         }
         throw new UnauthorizedException();

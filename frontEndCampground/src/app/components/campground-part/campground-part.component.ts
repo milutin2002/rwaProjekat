@@ -31,9 +31,14 @@ nextImage() {
     this.store.select(selectCampgroundObject).subscribe(x=>{
       let c=x;
       console.log(c);
-      if(c){
+      if(c.selected){
         this.currentSlideIndex=0;
-        this.campground=c;
+        this.campground=c.selected;
+      }
+      if(c.deleted && this.campground){
+        if(this.campground.id===c.deleted){
+          this.campground=null;
+        }
       }
     });
   }
