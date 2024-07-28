@@ -10,6 +10,7 @@ import { updateCampgroundDto } from 'src/dtoEntites/updateCampgroundDto';
 
 @Controller('campgrounds')
 export class CampgroundController {
+    br:number=0;
     constructor(private service:CampgroundService,private imageServie:ImageService){}
     @Get("")
     public getCampgrounds(){
@@ -34,12 +35,19 @@ export class CampgroundController {
     @UseInterceptors(FilesInterceptor('files',6,multerOptions))
     @Put()
     public async updateCampground(@Body()campground:updateCampgroundDto,@Request() req,@UploadedFiles() files: Array<Express.Multer.File>){
-        console.log(campground.userId);
-        if(req.user.id==campground.userId){
-            const images=await this.imageServie.saveImages(files,parseInt(campground.userId));
+        try{
+        console.log(req.user.id);
+        console.log(campground);
+        if(req.user.id==parseInt(campground.userId)){
+            console.log("Ugradio sam slike");
+            await this.imageServie.saveImages(files,parseInt(campground.id));
             //await this.imageServie.deleteSelectedImages(campground.deletedImages);
             return this.service.updateCampground(campground);
         }
+        }catch(e){
+            console.log(e);
+        }
+        console.log("Nema authorisazaciju");
         throw new UnauthorizedException();
     }
     @UseGuards(JwtAuthGuard)

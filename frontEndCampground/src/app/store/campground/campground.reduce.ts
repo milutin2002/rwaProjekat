@@ -6,7 +6,8 @@ import { createEntityAdapter, EntityState } from '@ngrx/entity';
 
 export interface CampgroundState extends EntityState<campground>{
     selectCampground:number,
-    deletedCampground:number | null
+    deletedCampground:number | null,
+    updatedCampground:campground | null
 }
 export interface CampgroundStateOld{
     campgrounds:campground[],
@@ -16,18 +17,29 @@ export interface CampgroundStateOld{
 const adapter=createEntityAdapter<campground>();
 export const initialState:CampgroundState=adapter.getInitialState({
     selectCampground:0,
-    deletedCampground:null
+    deletedCampground:null,
+    updatedCampground:null
 });
 export const campgroundReducer=createReducer(initialState,on(Actions.selectCampgrounds,(state,{campground})=>{
     return {
         ...state,
         selectCampground:campground,
-        deletedCampground:null
+        deletedCampground:null,
+        updatedCampground:null
     }
 }),on(Actions.loadCampgroundsSuccess,(state,{campgrounds})=>{
-    return adapter.setAll(campgrounds,{...state,deletedCampground:null});
+    return adapter.setAll(campgrounds,{...state,deletedCampground:null,updatedCampground:null});
 }),on(Actions.addCampgroundSuccess,(state,{campground})=>{
-    return adapter.addOne(campground,{...state,deletedCampground:null});
+    return adapter.addOne(campground,{...state,deletedCampground:null,updatedCampground:null});
 }),on(Actions.deleteCampgroundSuccess,(state,{id})=>{
-    return adapter.removeOne(id,{...state,deletedCampground:id});
+    return adapter.removeOne(id,{...state,deletedCampground:id,updatedCampground:null});
+}),on(Actions.updateCampgroundSuccess,(state,{campground})=>{
+    if(!campground){
+        return state;
+    }
+    return adapter.updateOne({ id: campground.id, changes: campground }, {
+        ...state,
+        deletedCampground: null,
+        updatedCampground: campground
+      });
 }));

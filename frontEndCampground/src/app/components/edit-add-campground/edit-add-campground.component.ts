@@ -16,16 +16,23 @@ export class EditAddCampgroundComponent {
     const formData=new FormData();
     formData.append("title",this.title);
     formData.append("content",this.content);
-    formData.append("deletedImages",JSON.stringify(this.delete));
+    /*for (let i = 0; i < this.delete.length; i++) {
+      formData.append("deletedImages",this.delete[i].toString());
+    }*/
     formData.append("userId",this.userId.toString());
+    console.log(this.id);
     formData.append("id",this.id.toString());
     for (let i = 0; i < this.selectedFiles.length; i++) {
       formData.append("files",this.selectedFiles[i].file);
     }
+    formData.forEach((value, key) => {
+      console.log(`${key}: ${value}`);
+  });
     if(!this.editMode){
       this.store.dispatch(addCampground({formData:formData}));
     }
     else{
+      console.log("Sending update");
       this.store.dispatch(updateCampground({formData:formData}));
     }
     this.dialogRef.close();

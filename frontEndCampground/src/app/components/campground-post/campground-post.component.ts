@@ -26,6 +26,11 @@ deleteCampground(id:number) {
           this.campground=null;
         }
       }
+      else if(b.updated && this.campground){
+        if(b.updated.id===this.campground.id){
+          this.campground=b.updated;
+        }
+      }
     })
   }
 @Input()campground: campground|null=null;

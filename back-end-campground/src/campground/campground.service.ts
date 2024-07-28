@@ -43,8 +43,11 @@ export class CampgroundService {
   }
   public async updateCampground(campground: updateCampgroundDto) {
     await this.campgroundRepository.update(parseInt(campground.id),{...campground,userId:parseInt(campground.userId),id:parseInt(campground.id)});
-    return this.campgroundRepository.find({where:{"id":parseInt(campground.id)},relations:{
+    console.log("Vraca se updatovan");
+    let res= await this.campgroundRepository.find({where:{"id":parseInt(campground.id)},relations:{
       images:true
     },take:1});
+    console.log("Uzet je");
+    return res[0];
   }
 }

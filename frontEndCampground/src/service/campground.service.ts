@@ -21,6 +21,6 @@ export class CampgroundService {
     return this.httpClient.delete<number>("http://localhost:3000/campgrounds/"+id);
   }
   updateCampground(formData:FormData):Observable<campground>{
-    return this.httpClient.put<campground>("http://localhost:3000/campgrounds",formData);
+    return this.httpClient.put<campground>("http://localhost:3000/campgrounds/",formData);
   }
 }

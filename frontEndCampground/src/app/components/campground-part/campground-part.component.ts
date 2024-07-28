@@ -40,6 +40,11 @@ nextImage() {
           this.campground=null;
         }
       }
+      if(x.updated && this.campground){
+        if(x.updated.id===this.campground.id){
+          this.campground=x.updated;
+        }
+      }
     });
   }
 }

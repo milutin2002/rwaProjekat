@@ -4,6 +4,5 @@ export interface updateCampgroundDto{
     id:string,
     title:string,
     content:string,
-    userId:string,
-    deletedImages:number[];
+    userId:string
 }
