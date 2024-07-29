@@ -1,3 +1,4 @@
+import { Transform } from "class-transformer";
 import { IsArray, IsInt, IsOptional, IsString } from "class-validator";
 import { campground } from "src/models/campground";
 
@@ -14,8 +15,6 @@ export class updateCampgroundDto {
     @IsInt()
     id: string;
   
-    @IsArray()
-    @IsString({ each: true })
     @IsOptional()
-    deletedImages?: string[];
+    deletedImages?: string[] | string;
   }
