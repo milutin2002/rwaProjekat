@@ -36,12 +36,12 @@ export class CampgroundController {
     @Put()
     public async updateCampground(@Body()campground:updateCampgroundDto,@Request() req,@UploadedFiles() files: Array<Express.Multer.File>){
         try{
-        console.log(req.user.id);
+        this.br++;
         console.log(campground);
         if(req.user.id==parseInt(campground.userId)){
             console.log("Ugradio sam slike");
             await this.imageServie.saveImages(files,parseInt(campground.id));
-            //await this.imageServie.deleteSelectedImages(campground.deletedImages);
+            await this.imageServie.deleteSelectedImages(campground.deletedImages);
             return this.service.updateCampground(campground);
         }
         }catch(e){

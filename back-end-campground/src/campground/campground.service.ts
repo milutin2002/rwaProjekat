@@ -42,7 +42,7 @@ export class CampgroundService {
     throw new UnauthorizedException();
   }
   public async updateCampground(campground: updateCampgroundDto) {
-    await this.campgroundRepository.update(parseInt(campground.id),{...campground,userId:parseInt(campground.userId),id:parseInt(campground.id)});
+    await this.campgroundRepository.update(parseInt(campground.id),{title:campground.title,content:campground.content,userId:parseInt(campground.userId),id:parseInt(campground.id)});
     console.log("Vraca se updatovan");
     let res= await this.campgroundRepository.find({where:{"id":parseInt(campground.id)},relations:{
       images:true

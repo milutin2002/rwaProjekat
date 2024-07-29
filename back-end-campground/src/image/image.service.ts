@@ -19,10 +19,10 @@ export class ImageService {
     public async deleteImages(campId:number){
         return this.imageRepository.delete({"campgroundId":campId});
     }
-    public async deleteSelectedImages(selected:number[]){
+    public async deleteSelectedImages(selected:string[]){
         let promises:Promise<any>[]=[];
         for (let i = 0; i <selected.length; i++) {
-            promises.push(this.imageRepository.delete({id:selected[i]}));
+            promises.push(this.imageRepository.delete({id:parseInt(selected[i])}));
         }
         return Promise.all(promises);
     }
