@@ -14,16 +14,18 @@ import { user } from '../../../models/user';
 export class CommentComponent {
   c:comment | null=null;
   u:user | null=null;
-  constructor(private store:Store<AppState>){}
+  constructor(private store:Store<AppState>){
+    this.store.select(selectCommentUserComment).subscribe(c=>{
+      console.log("Doslo je do promene");
+      this.c=c.userComment;
+      this.u=c.user;
+    });
+  }
 setRating(rate: number) {
     this.rating=rate;
 }
 onSubmit() {
   this.store.dispatch(CommentActions.addComment({comment:{campgroundId:this.campgroundId,content:this.content,rating:this.rating}}));
-  this.store.select(selectCommentUserComment).subscribe(c=>{
-    this.c=c.userComment;
-    this.u=c.user;
-  })
 }
 @Input()campgroundId:number=0;
 content:string= '';

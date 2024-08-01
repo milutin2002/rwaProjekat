@@ -3,9 +3,11 @@ import { createEffect,Actions, ofType } from "@ngrx/effects";
 import * as CampgroundActions from './campground.action';
 import { catchError, filter, map, mergeMap, of } from "rxjs";
 import { CampgroundService } from "../../../service/campground.service";
+import {CommentService} from '../../../service/comment.service';
+import * as CommentActions from '../comment/comment.action';
 @Injectable()
 export class CampgroundEffects{
-    constructor(private actions$:Actions,private campgroundService:CampgroundService){
+    constructor(private actions$:Actions,private campgroundService:CampgroundService,private commentService:CommentService){
 
     }
     loadCampgrounds=createEffect(()=>this.actions$.pipe(ofType(CampgroundActions.loadCampgrounds),mergeMap(()=>this.campgroundService.getCampgrounds().pipe(map((camps)=>CampgroundActions.loadCampgroundsSuccess({campgrounds:camps}))))))
@@ -21,4 +23,5 @@ export class CampgroundEffects{
         console.error('Update campground failed', error);
         return of(CampgroundActions.updateCampgroundFailure({ error }));
     }))})));
+    selectCampground=createEffect(()=>this.actions$.pipe(ofType(CampgroundActions.selectCampgrounds),mergeMap((d)=>this.commentService.getComments(d.campground).pipe(map(r=>CommentActions.loadCommentsSuccess({userComment:r.userComments,comments:r.comments}))))))
 }

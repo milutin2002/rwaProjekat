@@ -36,9 +36,10 @@ import { StarRatingModule } from 'angular-star-rating';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { commentReducer } from './store/comment/comment.reduce';
 import { CommentEffects } from './store/comment/comment.effect';
+import { CommentListComponent } from './components/comment-list/comment-list.component';
 @NgModule({
   declarations: [
-    AppComponent,CampgroundsPostsComponent,CampgroundPostComponent, CampgroundPartComponent, RegisterComponent, LoginComponent, MainPageComponent, EditUserProfileComponent, EditAddCampgroundComponent, CommentComponent],
+    AppComponent,CampgroundsPostsComponent,CampgroundPostComponent, CampgroundPartComponent, RegisterComponent, LoginComponent, MainPageComponent, EditUserProfileComponent, EditAddCampgroundComponent, CommentComponent, CommentListComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,HttpClientModule,StoreModule.forRoot<AppState>({campgrounds:campgroundReducer,user:userReducer,comment:commentReducer}),StoreDevtoolsModule.instrument({

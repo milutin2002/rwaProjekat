@@ -1,3 +1,4 @@
+<mat-divider></mat-divider>
 <div *ngIf="!c" class="comment-form-container">
   <form (ngSubmit)="onSubmit()" #commentForm="ngForm">
     <mat-form-field appearance="fill">
@@ -18,7 +19,6 @@
   <mat-card-header *ngIf="c">
     <img *ngIf="u" class="avatar" [src]="'http://localhost:3000/'+u.profilePicture">
     <mat-card-title>{{ u?.username}}</mat-card-title>
-    <mat-card-subtitle>{{ c.content }}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
     <div class="star-rating" *ngIf="c">

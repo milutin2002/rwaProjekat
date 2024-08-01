@@ -12,4 +12,6 @@ export const initialState:CommentState=adapter.getInitialState({
 });
 export const commentReducer=createReducer(initialState,on(CommentActions.addUpdateCommentSuccess,(state,{comment})=>{
     return {...state,userComment:comment};
+}),on(CommentActions.loadCommentsSuccess,(state,{userComment,comments})=>{
+    return adapter.setAll(comments,{...state,userComment:userComment});
 }));
