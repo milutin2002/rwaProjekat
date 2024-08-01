@@ -43,7 +43,7 @@ import { CommentEffects } from './store/comment/comment.effect';
     BrowserModule,
     AppRoutingModule,HttpClientModule,StoreModule.forRoot<AppState>({campgrounds:campgroundReducer,user:userReducer,comment:commentReducer}),StoreDevtoolsModule.instrument({
       maxAge:25
-    }),EffectsModule.forRoot([CampgroundEffects,UserEffects,CommentEffects]),MatCardModule,MatFormFieldModule,MatDividerModule,FormsModule,MatInputModule,MatButtonModule,ReactiveFormsModule,BrowserAnimationsModule,MatDialogModule,NgxStarRatingModule,FontAwesomeModule
+    }),EffectsModule.forRoot([CampgroundEffects,UserEffects,CommentEffects]),MatCardModule,MatFormFieldModule,MatDividerModule,FormsModule,MatInputModule,MatButtonModule,ReactiveFormsModule,BrowserAnimationsModule,MatDialogModule,NgxStarRatingModule,FontAwesomeModule,MatCardModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
