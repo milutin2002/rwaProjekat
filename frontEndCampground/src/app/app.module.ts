@@ -29,14 +29,21 @@ import { UserEffects } from './store/user/user.effect';
 import { EditUserProfileComponent } from './components/edit-user-profile/edit-user-profile.component';
 import {MatDialogModule, matDialogAnimations} from '@angular/material/dialog';
 import { EditAddCampgroundComponent } from './components/edit-add-campground/edit-add-campground.component';
+import { CommentComponent } from './components/comment/comment.component';
+import { NgxStarRatingModule } from 'ngx-star-rating';
+import { RatingModule } from 'ng-starrating';
+import { StarRatingModule } from 'angular-star-rating';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { commentReducer } from './store/comment/comment.reduce';
+import { CommentEffects } from './store/comment/comment.effect';
 @NgModule({
   declarations: [
-    AppComponent,CampgroundsPostsComponent,CampgroundPostComponent, CampgroundPartComponent, RegisterComponent, LoginComponent, MainPageComponent, EditUserProfileComponent, EditAddCampgroundComponent],
+    AppComponent,CampgroundsPostsComponent,CampgroundPostComponent, CampgroundPartComponent, RegisterComponent, LoginComponent, MainPageComponent, EditUserProfileComponent, EditAddCampgroundComponent, CommentComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule,HttpClientModule,StoreModule.forRoot<AppState>({campgrounds:campgroundReducer,user:userReducer}),StoreDevtoolsModule.instrument({
+    AppRoutingModule,HttpClientModule,StoreModule.forRoot<AppState>({campgrounds:campgroundReducer,user:userReducer,comment:commentReducer}),StoreDevtoolsModule.instrument({
       maxAge:25
-    }),EffectsModule.forRoot([CampgroundEffects,UserEffects]),MatCardModule,MatFormFieldModule,MatDividerModule,FormsModule,MatInputModule,MatButtonModule,ReactiveFormsModule,BrowserAnimationsModule,MatDialogModule
+    }),EffectsModule.forRoot([CampgroundEffects,UserEffects,CommentEffects]),MatCardModule,MatFormFieldModule,MatDividerModule,FormsModule,MatInputModule,MatButtonModule,ReactiveFormsModule,BrowserAnimationsModule,MatDialogModule,NgxStarRatingModule,FontAwesomeModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

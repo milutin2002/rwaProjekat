@@ -27,7 +27,8 @@ export class CommentController {
     }
     @UseGuards(JwtAuthGuard)
     @Delete(":id")
-    deleteComment(@Param('id',ParseIntPipe)id:number,@Request() req){
-        return this.commentService.deleteComment(id,req.user.id);
+    async deleteComment(@Param('id',ParseIntPipe)id:number,@Request() req){
+        await this.commentService.deleteComment(id,req.user.id);
+        return id;
     }
 }

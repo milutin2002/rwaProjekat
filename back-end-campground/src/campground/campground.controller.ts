@@ -41,11 +41,13 @@ export class CampgroundController {
         if(req.user.id==parseInt(campground.userId)){
             console.log("Ugradio sam slike");
             await this.imageServie.saveImages(files,parseInt(campground.id));
-            if(Array.isArray(campground.deletedImages)){
-                await this.imageServie.deleteSelectedImages(campground.deletedImages);
-            }
-            else{
-                await this.imageServie.deleteSelectedImages([campground.deletedImages]);
+            if(campground.deletedImages){
+                if(Array.isArray(campground.deletedImages)){
+                    await this.imageServie.deleteSelectedImages(campground.deletedImages);
+                }
+                else{
+                    await this.imageServie.deleteSelectedImages([campground.deletedImages]);
+                }
             }
             return this.service.updateCampground(campground);
         }

@@ -1,0 +1,31 @@
+.comment-form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2em;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.star-rating {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1em;
+}
+
+.star-rating fa-icon {
+  cursor: pointer;
+  color: #ddd;
+  transition: color 0.3s;
+}
+
+.star-rating fa-icon.rated {
+  color: #ffca28;
+}
+
+button[mat-raised-button] {
+  align-self: center;
+}

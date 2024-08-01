@@ -11,3 +11,4 @@
         <h2>{{ campground.title }}</h2>
         <mat-divider></mat-divider>
         <p class="oglas-content">{{ campground.content }}</p>
+        <app-comment [campgroundId]="campground.id"></app-comment>

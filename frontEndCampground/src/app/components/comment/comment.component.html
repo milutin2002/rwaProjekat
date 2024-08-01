@@ -1,0 +1,18 @@
+<div class="comment-form-container">
+  <form (ngSubmit)="onSubmit()" #commentForm="ngForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Write your comment</mat-label>
+      <textarea matInput name="content" [(ngModel)]="content" required></textarea>
+    </mat-form-field>
+
+    <div class="star-rating">
+      <fa-icon *ngFor="let star of [1,2,3,4,5]" 
+               [class.rated]="rating >= star" 
+               (click)="setRating(star)" 
+               [icon]="faStar" 
+               size="2x"></fa-icon>
+    </div>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="commentForm.invalid">Submit</button>
+  </form>
+</div>

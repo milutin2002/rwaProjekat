@@ -15,7 +15,9 @@ export class CommentService {
     }
     public async getComments(campgroundId:number,userId:number){
         const userComments=await this.commentRepository.findOneBy({userId:userId,campgroundId:campgroundId});
-        const comments=await this.commentRepository.findBy({campgroundId:campgroundId});
+        const comments=await this.commentRepository.find({where:{campgroundId:campgroundId},relations:{
+            user:true
+        }});
         return {userComments:userComments,comments:comments};
     }
     public async updateComment(comment:comment){
