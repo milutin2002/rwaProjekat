@@ -19,20 +19,7 @@ updateCampground() {
 deleteCampground(id:number) {
   this.store.dispatch(deleteCampground({id:id}));
 }
-  constructor(private store:Store<AppState>,private dialog: MatDialog){
-    store.select(selectCampgroundObject).subscribe(b=>{
-      if(b.deleted && this.campground){
-        if(this.campground.id==b.deleted){
-          this.campground=null;
-        }
-      }
-      else if(b.updated && this.campground){
-        if(b.updated.id===this.campground.id){
-          this.campground=b.updated;
-        }
-      }
-    })
-  }
+  constructor(private store:Store<AppState>,private dialog: MatDialog){}
 @Input()campground: campground|null=null;
 imageUrl:string="http://localhost:3000/";
   selectCampground(id:number | undefined){

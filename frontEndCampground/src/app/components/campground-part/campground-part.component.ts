@@ -11,7 +11,7 @@ import { selectCampgroundObject } from '../../store/campground/campground.select
   styleUrl: './campground-part.component.scss'
 })
 export class CampgroundPartComponent implements OnInit{
-campground: campground | null=null;
+campground: campground | undefined=undefined;
 currentSlideIndex: number = 0;
 prevImage() {
   if (this.campground?.images?.length) {
@@ -29,22 +29,7 @@ nextImage() {
   }
   ngOnInit(): void {
     this.store.select(selectCampgroundObject).subscribe(x=>{
-      let c=x;
-      console.log(c);
-      if(c.selected){
-        this.currentSlideIndex=0;
-        this.campground=c.selected;
-      }
-      if(c.deleted && this.campground){
-        if(this.campground.id===c.deleted){
-          this.campground=null;
-        }
-      }
-      if(x.updated && this.campground){
-        if(x.updated.id===this.campground.id){
-          this.campground=x.updated;
-        }
-      }
+      this.campground=x.selected;
     });
   }
 }
