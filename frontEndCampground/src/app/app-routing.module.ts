@@ -6,7 +6,7 @@ import { MainPageComponent } from './components/main-page/main-page.component';
 import { AuthGuard } from './guard/AuthGuard';
 import { NoAuthGuard } from './guard/NoAuthGuard';
 
-const routes: Routes = [{path:'',component:LoginComponent,canActivate:[NoAuthGuard]},{path:'registracija',component:RegisterComponent,canActivate:[NoAuthGuard]},{path:"main",component:MainPageComponent,canActivate:[AuthGuard]}];
+const routes: Routes = [{path:'',component:LoginComponent,canActivate:[NoAuthGuard]},{path:'registracija',component:RegisterComponent,canActivate:[NoAuthGuard]},{path:"main",component:MainPageComponent,canActivate:[AuthGuard]},{path:"main/:admin",component:MainPageComponent,canActivate:[AuthGuard]}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

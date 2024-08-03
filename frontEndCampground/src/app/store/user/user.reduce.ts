@@ -6,9 +6,10 @@ import { createEntityAdapter, EntityState } from '@ngrx/entity';
 import { user } from '../../../models/user';
 
 export interface UserState{
-    user:user | null
+    user:user | null,
+    isAdminPage:boolean
 }
-export const initialState:UserState={user:null}
+export const initialState:UserState={user:null,isAdminPage:false}
 export const userReducer=createReducer(initialState,on(Actions.loadUserSuccess,(state,{user})=>{
     return {
         ...state,

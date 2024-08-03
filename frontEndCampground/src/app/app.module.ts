@@ -37,14 +37,16 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { commentReducer } from './store/comment/comment.reduce';
 import { CommentEffects } from './store/comment/comment.effect';
 import { CommentListComponent } from './components/comment-list/comment-list.component';
+import { HeaderToolbarComponent } from './components/header-toolbar/header-toolbar.component';
+import {MatToolbarModule} from '@angular/material/toolbar'; 
 @NgModule({
   declarations: [
-    AppComponent,CampgroundsPostsComponent,CampgroundPostComponent, CampgroundPartComponent, RegisterComponent, LoginComponent, MainPageComponent, EditUserProfileComponent, EditAddCampgroundComponent, CommentComponent, CommentListComponent],
+    AppComponent,CampgroundsPostsComponent,CampgroundPostComponent, CampgroundPartComponent, RegisterComponent, LoginComponent, MainPageComponent, EditUserProfileComponent, EditAddCampgroundComponent, CommentComponent, CommentListComponent, HeaderToolbarComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,HttpClientModule,StoreModule.forRoot<AppState>({campgrounds:campgroundReducer,user:userReducer,comment:commentReducer}),StoreDevtoolsModule.instrument({
       maxAge:25
-    }),EffectsModule.forRoot([CampgroundEffects,UserEffects,CommentEffects]),MatCardModule,MatFormFieldModule,MatDividerModule,FormsModule,MatInputModule,MatButtonModule,ReactiveFormsModule,BrowserAnimationsModule,MatDialogModule,NgxStarRatingModule,FontAwesomeModule,MatCardModule
+    }),EffectsModule.forRoot([CampgroundEffects,UserEffects,CommentEffects]),MatCardModule,MatFormFieldModule,MatDividerModule,FormsModule,MatInputModule,MatButtonModule,ReactiveFormsModule,BrowserAnimationsModule,MatDialogModule,NgxStarRatingModule,FontAwesomeModule,MatCardModule,MatToolbarModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

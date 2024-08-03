@@ -34,6 +34,7 @@ export class RegisterComponent implements AfterViewInit{
     if(doc){
     fromEvent(doc,'input').pipe(debounceTime(500),map((ev:Event)=>(<HTMLInputElement>ev.target).value),filter(x=>x.length>0),switchMap(x=>this.service.doubleUsername(x))).subscribe(x=>{
         this.doubleUsername=x;
+        this.usernameFormControl.updateValueAndValidity();
         console.log(x);
     })
     }

@@ -16,7 +16,7 @@ import { AppState } from '../../app.state';
 export class CampgroundsPostsComponent {
   campgrounds$:Observable<campground[]>=of([]);
   constructor(private service:CampgroundService,private store:Store<AppState>){
-    this.store.dispatch(loadCampgrounds());
+    //this.store.dispatch(loadCampgrounds({admin:"myCampgrounds"}));
     this.campgrounds$=this.store.select(selectCampgroundList);
   }
   select(campgroundSelected:number){

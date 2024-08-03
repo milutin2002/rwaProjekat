@@ -8,6 +8,9 @@ import { user } from '../models/user';
   providedIn: 'root'
 })
 export class UserService{
+  logout() {
+    localStorage.removeItem("jwtToken");
+  }
   getToken():string | null {
       if(localStorage.getItem("jwtToken")){
         return localStorage.getItem("jwtToken");
