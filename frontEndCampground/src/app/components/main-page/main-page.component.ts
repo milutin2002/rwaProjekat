@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../service/user-service.service';
 import { AppState } from '../../app.state';
-import { loadUser } from '../../store/user/user.action';
+import { changeAdminPage, loadUser } from '../../store/user/user.action';
 import { selectUser } from '../../store/user/user.selection';
 import { Store } from '@ngrx/store';
 import { user } from '../../../models/user';
@@ -37,6 +37,8 @@ export class MainPageComponent implements OnInit{
       if(param.has("admin")){
         this.parmPath=param.get("admin");
         this.isAdmin=this.parmPath==="admin";
+        console.log("Poslao sam "+this.isAdmin);
+        this.store.dispatch(changeAdminPage({page:this.isAdmin}));
         if(this.isAdmin){
           this.store.dispatch(loadCampgrounds({admin:"myCampgrounds"}));
         }

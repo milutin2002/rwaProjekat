@@ -7,12 +7,14 @@ import { user } from '../../../models/user';
 
 export interface UserState{
     user:user | null,
-    isAdminPage:boolean
+    page:boolean
 }
-export const initialState:UserState={user:null,isAdminPage:false}
+export const initialState:UserState={user:null,page:false}
 export const userReducer=createReducer(initialState,on(Actions.loadUserSuccess,(state,{user})=>{
     return {
         ...state,
         user:user
     }
+}),on(Actions.changeAdminPage,(state,{page})=>{
+    return {...state,page};
 }));

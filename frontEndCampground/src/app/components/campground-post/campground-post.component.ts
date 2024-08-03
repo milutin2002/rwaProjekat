@@ -6,6 +6,7 @@ import { deleteCampground, selectCampgrounds } from '../../store/campground/camp
 import { selectCampgroundObject } from '../../store/campground/campground.selection';
 import { MatDialog } from '@angular/material/dialog';
 import { EditAddCampgroundComponent } from '../edit-add-campground/edit-add-campground.component';
+import { selectPage } from '../../store/user/user.selection';
 
 @Component({
   selector: 'app-campground-post',
@@ -13,13 +14,19 @@ import { EditAddCampgroundComponent } from '../edit-add-campground/edit-add-camp
   styleUrl: './campground-post.component.scss'
 })
 export class CampgroundPostComponent {
+isAdminPage:boolean=true;
 updateCampground() {
     this.dialog.open(EditAddCampgroundComponent,{data:{...this.campground}});
 }
 deleteCampground(id:number) {
   this.store.dispatch(deleteCampground({id:id}));
 }
-  constructor(private store:Store<AppState>,private dialog: MatDialog){}
+  constructor(private store:Store<AppState>,private dialog: MatDialog){
+    this.store.select(selectPage).subscribe(x=>{
+      console.log(x);
+      this.isAdminPage=x;
+    })
+  }
 @Input()campground: campground|null=null;
 imageUrl:string="http://localhost:3000/";
   selectCampground(id:number | undefined){

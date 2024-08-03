@@ -60,7 +60,6 @@ export class CampgroundController {
     @UseGuards(JwtAuthGuard)
     @Delete(":id")
     public async delectCampground(@Param('id',ParseIntPipe)id:number,@Request()req){
-        await this.imageServie.deleteImages(id);
         await this.service.deleteCampground(id,req.user.id);
         return id;
     }

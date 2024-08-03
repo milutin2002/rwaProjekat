@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { RelationshipType } from 'sequelize/types/errors/database/foreign-key-constraint-error';
 import { campgroundDto } from 'src/dtoEntites/campgroundDto';
 import { updateCampgroundDto } from 'src/dtoEntites/updateCampgroundDto';
+import { ImageService } from 'src/image/image.service';
 import { campground } from 'src/models/campground';
 import { image } from 'src/models/image';
 import { UsersService } from 'src/users/users.service';
@@ -12,7 +13,7 @@ import { Repository } from 'typeorm';
 @Injectable()
 export class CampgroundService {
   
-  constructor(@InjectRepository(campground) private campgroundRepository:Repository<campground>){}
+  constructor(@InjectRepository(campground) private campgroundRepository:Repository<campground>,private imageService:ImageService){}
   getCampgrounds(){
     return this.campgroundRepository.find({relations:{images:true}});
   }
@@ -37,6 +38,7 @@ export class CampgroundService {
   public async deleteCampground(id:number,idU:number){
     const campgroundToDelete=await this.getCampgroundById(id);
     if(campgroundToDelete.userId===idU){
+      await this.imageService.deleteImages(id);
       return await this.campgroundRepository.delete(id);
     }
     throw new UnauthorizedException();

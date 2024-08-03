@@ -5,9 +5,9 @@
       <span class="oglas-content">{{campground.content | slice:0:80}}<span *ngIf="campground?.content?.length! > 50"
         class="fade-out"></span>...</span>
       <div class="buttons-container">
-        <button mat-raised-button class="button-levo" (click)="deleteCampground(campground.id)" color="accent"
+        <button mat-raised-button *ngIf="isAdminPage" class="button-levo" (click)="deleteCampground(campground.id)" color="accent"
           >Izbrišite</button>
-        <button mat-raised-button class="button-desno" (click)="updateCampground()" >Editujte</button>
+        <button mat-raised-button *ngIf="isAdminPage" class="button-desno" (click)="updateCampground()" >Editujte</button>
       </div>
     </div>
 </li>
