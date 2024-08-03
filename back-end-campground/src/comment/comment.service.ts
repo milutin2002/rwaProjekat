@@ -2,23 +2,27 @@ import { Get, Injectable, NotFoundException, Param, ParseIntPipe, UnauthorizedEx
 import { InjectRepository } from '@nestjs/typeorm';
 import { commentDto } from 'src/dtoEntites/commentDto';
 import { comment } from 'src/models/comment';
+import { UsersService } from 'src/users/users.service';
 import { Repository } from 'typeorm';
 
 @Injectable()
 export class CommentService {
-    constructor(@InjectRepository(comment)private commentRepository:Repository<comment>){
+    constructor(@InjectRepository(comment)private commentRepository:Repository<comment>,private userService:UsersService){
 
     }
     public async addComment(id:number,commentDto:commentDto){
         const commentAdd=this.commentRepository.create({...commentDto,userId:id,date:new Date()});
-        return this.commentRepository.save(commentAdd);
+        const user=await this.userService.findById(commentAdd.userId);
+        const savedComment=await this.commentRepository.save(commentAdd);
+        savedComment.user=user;
+        return savedComment;
     }
     public async getComments(campgroundId:number,userId:number){
         const userComments=await this.commentRepository.findOneBy({userId:userId,campgroundId:campgroundId});
         const comments=await this.commentRepository.find({where:{campgroundId:campgroundId},relations:{
             user:true
         }});
-        return {userComments:userComments,comments:comments};
+        return {comments:comments};
     }
     public async updateComment(comment:comment){
         await this.commentRepository.update(comment.id,comment);

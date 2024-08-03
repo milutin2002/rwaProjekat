@@ -10,8 +10,8 @@ import { commentDto } from '../dtoEntities/commentDto';
 export class CommentService {
 
   constructor(private httpClient:HttpClient) { }
-  getComments(id:number):Observable<{userComments:comment,comments:comment[]}>{
-    return this.httpClient.get<{userComments:comment,comments:comment[]}>("http://localhost:3000/comment/"+id);
+  getComments(id:number):Observable<{comments:comment[]}>{
+    return this.httpClient.get<{comments:comment[]}>("http://localhost:3000/comment/"+id);
   }
   postComment(commentDto:commentDto):Observable<comment>{
     return this.httpClient.post<comment>("http://localhost:3000/comment",commentDto);

@@ -17,6 +17,7 @@ export class CommentComponent {
   constructor(private store:Store<AppState>){
     this.store.select(selectCommentUserComment).subscribe(c=>{
       console.log("Doslo je do promene");
+      console.log(c);
       this.c=c.userComment;
       this.u=c.user;
     });

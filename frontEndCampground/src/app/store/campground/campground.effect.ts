@@ -23,5 +23,5 @@ export class CampgroundEffects{
         console.error('Update campground failed', error);
         return of(CampgroundActions.updateCampgroundFailure({ error }));
     }))})));
-    selectCampground=createEffect(()=>this.actions$.pipe(ofType(CampgroundActions.selectCampgrounds),mergeMap((d)=>this.commentService.getComments(d.campground).pipe(map(r=>CommentActions.loadCommentsSuccess({userComment:r.userComments,comments:r.comments}))))))
+    selectCampground=createEffect(()=>this.actions$.pipe(ofType(CampgroundActions.selectCampgrounds),mergeMap((d)=>this.commentService.getComments(d.campground).pipe(map(r=>CommentActions.loadCommentsSuccess({comments:r.comments}))))))
 }
