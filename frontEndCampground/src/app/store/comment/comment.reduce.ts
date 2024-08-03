@@ -13,4 +13,6 @@ export const commentReducer=createReducer(initialState,on(CommentActions.addUpda
     return adapter.addOne(comment,state);
 }),on(CommentActions.loadCommentsSuccess,(state,{comments})=>{
     return adapter.setAll(comments,state);
+}),on(CommentActions.deleteCommentSuccess,(state,{id})=>{
+    return adapter.removeOne(id,state);
 }));

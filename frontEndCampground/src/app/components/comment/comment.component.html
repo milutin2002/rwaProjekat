@@ -29,4 +29,5 @@
     </div>
     <p class="comment-content" *ngIf="c">{{ c.content }}</p>
     <p class="comment-meta" *ngIf="c">Rating: {{ c.rating }} / 5</p>
+    <button mat-raised-button *ngIf="c" color="primary" type="submit" (click)="deleteComment(c.id)">Delete</button>
   </mat-card-content>

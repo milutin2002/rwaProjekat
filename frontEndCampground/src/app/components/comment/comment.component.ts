@@ -12,6 +12,9 @@ import { user } from '../../../models/user';
   styleUrl: './comment.component.css'
 })
 export class CommentComponent {
+deleteComment(id:number) {
+  this.store.dispatch(CommentActions.deleteComment({id:id}));
+}
   c:comment | null=null;
   u:user | null=null;
   constructor(private store:Store<AppState>){
