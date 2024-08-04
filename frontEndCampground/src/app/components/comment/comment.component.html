@@ -1,5 +1,5 @@
 <mat-divider></mat-divider>
-<div *ngIf="!c" class="comment-form-container">
+<div *ngIf="!c || editMode" class="comment-form-container">
   <form (ngSubmit)="onSubmit()" #commentForm="ngForm">
     <mat-form-field appearance="fill">
       <mat-label>Write your comment</mat-label>
@@ -16,18 +16,19 @@
     <button mat-raised-button color="primary" type="submit" [disabled]="commentForm.invalid">Submit</button>
   </form>
   </div>
-  <mat-card-header *ngIf="c">
+  <mat-card-header *ngIf="c && !editMode">
     <img *ngIf="u" class="avatar" [src]="'http://localhost:3000/'+u.profilePicture">
     <mat-card-title>{{ u?.username}}</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <div class="star-rating" *ngIf="c">
+    <div class="star-rating" *ngIf="c && !editMode">
       <fa-icon *ngFor="let star of [1,2,3,4,5]" 
                [class.rated]="c.rating >= star" 
                [icon]="faStar" 
                size="1x"></fa-icon>
     </div>
-    <p class="comment-content" *ngIf="c">{{ c.content }}</p>
-    <p class="comment-meta" *ngIf="c">Rating: {{ c.rating }} / 5</p>
-    <button mat-raised-button *ngIf="c" color="primary" type="submit" (click)="deleteComment(c.id)">Delete</button>
+    <p class="comment-content" *ngIf="c && !editMode">{{ c.content }}</p>
+    <p class="comment-meta" *ngIf="c && !editMode">Rating: {{ c.rating }} / 5</p>
+    <button mat-raised-button *ngIf="c && !editMode" color="error" type="submit" (click)="deleteComment(c.id)">Delete</button>
+    <button mat-raised-button *ngIf="c && !editMode" color="warning" type="submit" (click)="edit()">Edit</button>
   </mat-card-content>

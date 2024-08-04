@@ -17,7 +17,7 @@ export class CommentService {
     return this.httpClient.post<comment>("http://localhost:3000/comment",commentDto);
   }
   updateComment(comment:comment):Observable<comment>{
-    return this.httpClient.put<comment>("http://localhost:3000/comment",comment);
+    return this.httpClient.put<comment>("http://localhost:3000/comment/ ",comment);
   }
   deleteComment(id:number):Observable<number>{
     return this.httpClient.delete<number>("http://localhost:3000/comment/"+id);

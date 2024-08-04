@@ -5,5 +5,6 @@ export interface comment{
     content:string,
     data:Date,
     rating:number,
+    userId:number
     user:user | null
 }

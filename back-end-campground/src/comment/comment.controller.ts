@@ -18,8 +18,8 @@ export class CommentController {
         return this.commentService.addComment(req.user.id,comment);
     }
     @UseGuards(JwtAuthGuard)
-    @Put(":id")
-    updateComment(@Param('id',ParseIntPipe)id:number,@Request() req,@Body()comment:comment){
+    @Put("")
+    updateComment(@Request() req,@Body()comment:comment){
         if(comment.userId===req.user.id){
             return this.commentService.updateComment(comment);
         }
