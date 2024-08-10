@@ -39,4 +39,7 @@ export class CommentService {
         }
         throw new UnauthorizedException();
     }
+    public deleteCommentsByCamp(id:number){
+        return this.commentRepository.delete({"campgroundId":id});
+    }
 }
