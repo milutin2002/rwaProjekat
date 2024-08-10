@@ -1,6 +1,6 @@
 <mat-card class="karta">
     <mat-card-content class="dole">
-        <p>E-mail adresa</p>
+        <p>Username</p>
         <mat-form-field>
             <input matInput type="text" class="username" [formControl]="usernameFormControl" [(ngModel)]="username">
             <mat-error *ngIf="usernameFormControl.hasError('required')">Username je <strong>neophodan</strong></mat-error>

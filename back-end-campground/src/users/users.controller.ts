@@ -19,13 +19,10 @@ export class UsersController {
     @UseInterceptors(FileInterceptor('file',multerOptions))
     uploadFile(@Body()userUpdated:userDto2,@UploadedFile(
        ) file: Express.Multer.File,@Request()req) {
-        console.log(userUpdated);
         const updateBody={username:userUpdated.username,id:req.user.id};
-        console.log(file);
         if(file){
             updateBody["profilePicture"]=file.filename;
         }
-        console.log(updateBody);
         return this.userService.updateUser(updateBody);
     }
     @Get(":username")

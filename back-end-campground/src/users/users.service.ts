@@ -15,7 +15,9 @@ export class UsersService {
         return this.userRepository.findOneBy({username:username});
     }
     public async findById(id:number){
-        return this.userRepository.findOneBy({id:id});
+        const user=await this.userRepository.findOneBy({id:id});
+        const {password,...result}=user;
+        return result;
     }
     public async registerUser(userDto:userDto){
         const saltRounds=10;
@@ -26,7 +28,9 @@ export class UsersService {
     }
     public async updateUser(user:any){
         await this.userRepository.update(user.id,user);
-        return this.userRepository.findOneBy({"id":user.id});
+        const userUpdated=await this.userRepository.findOneBy({"id":user.id});
+        const {password,...result}=userUpdated;
+        return result;
     }
     public async doubleUsername(username:string){
         const user=await this.userRepository.findOneBy({"username":username});

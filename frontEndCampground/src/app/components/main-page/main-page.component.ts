@@ -37,7 +37,6 @@ export class MainPageComponent implements OnInit{
       if(param.has("admin")){
         this.parmPath=param.get("admin");
         this.isAdmin=this.parmPath==="admin";
-        console.log("Poslao sam "+this.isAdmin);
         this.store.dispatch(changeAdminPage({page:this.isAdmin}));
         if(this.isAdmin){
           this.store.dispatch(loadCampgrounds({admin:"myCampgrounds"}));

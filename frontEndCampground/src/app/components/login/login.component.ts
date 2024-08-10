@@ -12,6 +12,8 @@ login() {
   this.userService.login({username:this.username,password:this.password}).subscribe(x=>{
       localStorage.setItem("jwtToken","Bearer "+x.access_token);
       this.router.navigate(['main/admin']);
+  },error =>{
+    alert("Doslo je do greske prilikom logovanja");
   })
 }
 password: string='';

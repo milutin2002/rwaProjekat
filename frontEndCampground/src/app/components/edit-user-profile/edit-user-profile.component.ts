@@ -57,7 +57,6 @@ onFileSelected($event: any) {
     if(doc){
     fromEvent(doc,'input').pipe(debounceTime(500),map((ev:Event)=>(<HTMLInputElement>ev.target).value),filter(x=>x.length>0),switchMap(x=>this.service.doubleUsername(x))).subscribe(x=>{
         this.doubleUsername=x;
-        console.log(x);
     })
     }
   }

@@ -14,7 +14,7 @@ export class CommentService {
         const commentAdd=this.commentRepository.create({...commentDto,userId:id,date:new Date()});
         const user=await this.userService.findById(commentAdd.userId);
         const savedComment=await this.commentRepository.save(commentAdd);
-        savedComment.user=user;
+        savedComment.user={id:user.id,username:user.username,password:'',profilePicture:user.profilePicture,campgrounds:[],comments:[]};
         return savedComment;
     }
     public async getComments(campgroundId:number,userId:number){
