@@ -12,20 +12,21 @@ import { user } from '../../../models/user';
   styleUrl: './comment.component.css'
 })
 export class CommentComponent implements OnChanges {
-edit() {
-  if(this.c){
-    this.editMode=true;
-    this.content=this.c.content;
-    this.rating=this.c.rating;
-  }
+editMode:boolean=false;
+c:comment | null=null;
+u:user | null=null;
+content:string= '';
+rating:number=0;
+faStar = faStar;
+@Input()campgroundId:number=0;
+
+ngOnChanges(changes: SimpleChanges): void {
+    this.editMode=false;
+    this.content='';
+      this.rating=0;
 }
-deleteComment(id:number) {
-  this.store.dispatch(CommentActions.deleteComment({id:id}));
-}
-  editMode:boolean=false;
-  c:comment | null=null;
-  u:user | null=null;
-  constructor(private store:Store<AppState>){
+
+constructor(private store:Store<AppState>){
     this.editMode=false;
     this.store.select(selectCommentUserComment).subscribe(c=>{
       console.log("Doslo je do promene");
@@ -34,14 +35,23 @@ deleteComment(id:number) {
       this.u=c.user;
     });
   }
-  ngOnChanges(changes: SimpleChanges): void {
-    this.editMode=false;
-    this.content='';
-      this.rating=0;
+
+edit() {
+  if(this.c){
+    this.editMode=true;
+    this.content=this.c.content;
+    this.rating=this.c.rating;
   }
+}
+
+deleteComment(id:number) {
+  this.store.dispatch(CommentActions.deleteComment({id:id}));
+}
+
 setRating(rate: number) {
     this.rating=rate;
 }
+
 onSubmit() {
   if(!this.editMode){
     this.store.dispatch(CommentActions.addComment({comment:{campgroundId:this.campgroundId,content:this.content,rating:this.rating}}));
@@ -55,8 +65,4 @@ onSubmit() {
     }
   }
 }
-@Input()campgroundId:number=0;
-content:string= '';
-rating:number=0;
-faStar = faStar;
 }

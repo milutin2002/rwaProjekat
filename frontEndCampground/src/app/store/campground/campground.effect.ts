@@ -18,9 +18,7 @@ export class CampgroundEffects{
     }),mergeMap((d)=>{
         return this.campgroundService.updateCampground(d.formData).pipe(map((camp)=>
             {
-                console.log(camp);
                 return CampgroundActions.updateCampgroundSuccess({campground:camp})}),catchError(error => {
-        console.error('Update campground failed', error);
         return of(CampgroundActions.updateCampgroundFailure({ error }));
     }))})));
     selectCampground=createEffect(()=>this.actions$.pipe(ofType(CampgroundActions.selectCampgrounds),mergeMap((d)=>this.commentService.getComments(d.campground).pipe(map(r=>CommentActions.loadCommentsSuccess({comments:r.comments}))))))

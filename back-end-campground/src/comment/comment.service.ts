@@ -30,7 +30,6 @@ export class CommentService {
     }
     public async deleteComment(id:number,userId:number){
         const comment=await this.commentRepository.findOneBy({"id":id});
-        console.log(comment,id);
         if(!comment){
             throw new NotFoundException();
         }

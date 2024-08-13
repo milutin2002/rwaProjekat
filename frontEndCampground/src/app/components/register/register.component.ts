@@ -16,19 +16,12 @@ export class RegisterComponent implements AfterViewInit{
   passwordHasNumber: boolean = false;
   passwordHasCapital: boolean = false;
   doubleUsername:boolean=false;
-  checkPassword() {
-    const lengthRegex = /^.{8,20}$/;
-    const numberRegex = /\d/;
-    const capitalLetterRegex = /[A-Z]/;
+  usernameFormControl = new FormControl('', [Validators.required]);
 
-    this.passwordLengthValid = lengthRegex.test(this.pas);
-    this.passwordHasNumber = numberRegex.test(this.pas);
-    this.passwordHasCapital = capitalLetterRegex.test(this.pas);
-  }
-  
   constructor(private router: Router,private service:UserService) {
     
   }
+
   ngAfterViewInit(): void {
     var doc=document.getElementsByClassName('username');
     if(doc){
@@ -40,8 +33,16 @@ export class RegisterComponent implements AfterViewInit{
     }
   }
 
-  usernameFormControl = new FormControl('', [Validators.required]);
+  checkPassword() {
+    const lengthRegex = /^.{8,20}$/;
+    const numberRegex = /\d/;
+    const capitalLetterRegex = /[A-Z]/;
 
+    this.passwordLengthValid = lengthRegex.test(this.pas);
+    this.passwordHasNumber = numberRegex.test(this.pas);
+    this.passwordHasCapital = capitalLetterRegex.test(this.pas);
+  }
+  
   isFormValid(): boolean {
     return this.usernameFormControl.valid && this.passwordLengthValid && this.passwordHasNumber && this.passwordHasCapital && this.doubleUsername;
   }

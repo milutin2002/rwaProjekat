@@ -13,6 +13,16 @@ import { selectCampgroundObject } from '../../store/campground/campground.select
 export class CampgroundPartComponent implements OnInit{
 campground: campground | undefined=undefined;
 currentSlideIndex: number = 0;
+
+constructor(private store:Store<AppState>){
+
+}
+
+ngOnInit(): void {
+  this.store.select(selectCampgroundObject).subscribe(x=>{
+    this.campground=x.selected;
+  });
+}
 prevImage() {
   if (this.campground?.images?.length) {
     this.currentSlideIndex = (this.currentSlideIndex - 1 + this.campground.images.length) % this.campground.images.length;
@@ -24,12 +34,6 @@ nextImage() {
     this.currentSlideIndex = (this.currentSlideIndex + 1) % this.campground.images.length;
   }
 }
-  constructor(private store:Store<AppState>){
-
-  }
-  ngOnInit(): void {
-    this.store.select(selectCampgroundObject).subscribe(x=>{
-      this.campground=x.selected;
-    });
-  }
+  
+  
 }

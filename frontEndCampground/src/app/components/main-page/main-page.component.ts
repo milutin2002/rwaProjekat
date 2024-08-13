@@ -19,10 +19,8 @@ import { loadCampgrounds } from '../../store/campground/campground.action';
 export class MainPageComponent implements OnInit{
   isAdmin:boolean=false;
   parmPath:string | null='';
-  addDialog() {
-    this.dialog.open(EditAddCampgroundComponent,{data:null});
-  }
   user:user | null=null;
+  
   constructor(private store:Store<AppState>,private dialog: MatDialog,private route:ActivatedRoute){
     this.store.dispatch(loadUser());
     this.store.select(selectUser).subscribe(x=>{
@@ -32,6 +30,7 @@ export class MainPageComponent implements OnInit{
       dialog.closeAll();
     })
   }
+
   ngOnInit(): void {
     this.route.paramMap.subscribe(param=>{
       if(param.has("admin")){
@@ -47,6 +46,11 @@ export class MainPageComponent implements OnInit{
       }
     })
   }
+
+  addDialog() {
+    this.dialog.open(EditAddCampgroundComponent,{data:null});
+  }
+
   openDialog(){
     this.dialog.open(EditUserProfileComponent,{data:{...this.user}});
   }

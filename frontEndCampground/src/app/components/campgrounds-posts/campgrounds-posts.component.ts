@@ -15,10 +15,11 @@ import { AppState } from '../../app.state';
 })
 export class CampgroundsPostsComponent {
   campgrounds$:Observable<campground[]>=of([]);
+  
   constructor(private service:CampgroundService,private store:Store<AppState>){
-    //this.store.dispatch(loadCampgrounds({admin:"myCampgrounds"}));
     this.campgrounds$=this.store.select(selectCampgroundList);
   }
+  
   select(campgroundSelected:number){
     console.log("Poslao sam id");
     console.log(campgroundSelected);

@@ -25,7 +25,6 @@ export class CampgroundController {
     @Post()
     public async createCampground(@Body()campgroundDto:campgroundDto,@Request() req,@UploadedFiles() files: Array<Express.Multer.File>){
         const campgroundAdd:campground=await this.service.addCampground(campgroundDto,req.user.id);
-        console.log(files);
         const images=await this.imageServie.saveImages(files,campgroundAdd.id);
         campgroundAdd.images=images;
         return campgroundAdd;

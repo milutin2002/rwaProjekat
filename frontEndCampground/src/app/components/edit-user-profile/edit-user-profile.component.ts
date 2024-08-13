@@ -15,18 +15,33 @@ import { UserService } from '../../../service/user-service.service';
 })
 export class EditUserProfileComponent implements AfterViewInit {
 selectedFile: any;
-editujProfil() {
-  const formData=new FormData();
-  formData.append('username',this.data.username);
-  formData.append('file',this.selectedFile);
-  this.store.dispatch(updateUser({data:formData}));
-}
 doubleUsername:boolean=false;
+constructor(
+  public dialogRef: MatDialogRef<MainPageComponent>,
+  @Inject(MAT_DIALOG_DATA) public data: user,private store:Store<AppState>,private service:UserService
+) {}
+
+ngAfterViewInit(): void {
+  var doc=document.getElementsByClassName('username');
+  if(doc){
+  fromEvent(doc,'input').pipe(debounceTime(500),map((ev:Event)=>(<HTMLInputElement>ev.target).value),filter(x=>x.length>0),switchMap(x=>this.service.doubleUsername(x))).subscribe(x=>{
+      this.doubleUsername=x;
+  })
+  }
+}
+
 isValid():boolean{
   return this.doubleUsername;
 }
 closeDialog() {
   this.dialogRef.close();
+}
+
+editujProfil() {
+  const formData=new FormData();
+  formData.append('username',this.data.username);
+  formData.append('file',this.selectedFile);
+  this.store.dispatch(updateUser({data:formData}));
 }
 onFileSelected($event: any) {
   this.selectedFile = $event.target.files[0] as File;
@@ -48,16 +63,5 @@ onFileSelected($event: any) {
       reader.readAsDataURL(this.selectedFile);  
 }
 }
-  constructor(
-    public dialogRef: MatDialogRef<MainPageComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: user,private store:Store<AppState>,private service:UserService
-  ) {}
-  ngAfterViewInit(): void {
-    var doc=document.getElementsByClassName('username');
-    if(doc){
-    fromEvent(doc,'input').pipe(debounceTime(500),map((ev:Event)=>(<HTMLInputElement>ev.target).value),filter(x=>x.length>0),switchMap(x=>this.service.doubleUsername(x))).subscribe(x=>{
-        this.doubleUsername=x;
-    })
-    }
-  }
+  
 }

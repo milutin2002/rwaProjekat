@@ -24,7 +24,6 @@ export class CampgroundService {
     },where:{
       userId:id
     }});
-    console.log(res);
     return res; 
   }
   public async getCampgroundById(id:number){
@@ -47,11 +46,9 @@ export class CampgroundService {
   }
   public async updateCampground(campground: updateCampgroundDto) {
     await this.campgroundRepository.update(parseInt(campground.id),{title:campground.title,content:campground.content,userId:parseInt(campground.userId),id:parseInt(campground.id)});
-    console.log("Vraca se updatovan");
     let res= await this.campgroundRepository.find({where:{"id":parseInt(campground.id)},relations:{
       images:true
     },take:1});
-    console.log("Uzet je");
     return res[0];
   }
 }

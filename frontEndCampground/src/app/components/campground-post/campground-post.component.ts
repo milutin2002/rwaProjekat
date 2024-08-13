@@ -14,22 +14,25 @@ import { selectPage } from '../../store/user/user.selection';
   styleUrl: './campground-post.component.scss'
 })
 export class CampgroundPostComponent {
+imageUrl:string="http://localhost:3000/";
 isAdminPage:boolean=true;
+@Input()campground: campground|null=null;
+
+constructor(private store:Store<AppState>,private dialog: MatDialog){
+  this.store.select(selectPage).subscribe(x=>{
+    this.isAdminPage=x;
+  })
+}
+
 updateCampground() {
     this.dialog.open(EditAddCampgroundComponent,{data:{...this.campground}});
 }
+
 deleteCampground(id:number) {
   this.store.dispatch(deleteCampground({id:id}));
 }
-  constructor(private store:Store<AppState>,private dialog: MatDialog){
-    this.store.select(selectPage).subscribe(x=>{
-      console.log(x);
-      this.isAdminPage=x;
-    })
-  }
-@Input()campground: campground|null=null;
-imageUrl:string="http://localhost:3000/";
-  selectCampground(id:number | undefined){
+  
+selectCampground(id:number | undefined){
     if(id){
       this.store.dispatch(selectCampgrounds({campground:id}));
     }

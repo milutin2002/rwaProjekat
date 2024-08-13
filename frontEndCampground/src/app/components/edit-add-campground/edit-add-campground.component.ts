@@ -12,44 +12,16 @@ import { images } from '../../../models/images';
   styleUrl: './edit-add-campground.component.css'
 })
 export class EditAddCampgroundComponent {
-deletePicture(i:number,id: number) {
-  if(!this.checkedValues[i]){
-    this.delete.push(id);
-  }
-  else{
-    this.delete=this.delete.filter(b=>b!=id);
-  }
-  console.log(this.delete);
-}
+  checkedValues:boolean[]=[];
+  selectedFiles: any[] = [];
+  id=0
+  title: string='';
+  content: string='';
+  pictures: images[]=[];
+  delete:number[]=[];
+  userId:number=0;
+  editMode=false;
 
-  postaviOglas() {
-    const formData=new FormData();
-    formData.append("title",this.title);
-    formData.append("content",this.content);
-    /*for (let i = 0; i < this.delete.length; i++) {
-      formData.append("deletedImages",this.delete[i].toString());
-    }*/
-    formData.append("userId",this.userId.toString());
-    console.log(this.id);
-    formData.append("id",this.id.toString());
-    for (let i = 0; i < this.selectedFiles.length; i++) {
-      formData.append("files",this.selectedFiles[i].file);
-    }
-    for (let i = 0; i < this.delete.length; i++) {
-      formData.append("deletedImages",this.delete[i].toString());
-    }
-    formData.forEach((value, key) => {
-      console.log(`${key}: ${value}`);
-  });
-    if(!this.editMode){
-      this.store.dispatch(addCampground({formData:formData}));
-    }
-    else{
-      console.log("Sending update");
-      this.store.dispatch(updateCampground({formData:formData}));
-    }
-    this.dialogRef.close();
-  }
   constructor(private store:Store<AppState>,public dialogRef: MatDialogRef<EditAddCampgroundComponent>,@Inject(MAT_DIALOG_DATA) public data:campground | null){
     if(data){
       this.editMode=true;
@@ -63,15 +35,39 @@ deletePicture(i:number,id: number) {
       }
     }
   }
-  checkedValues:boolean[]=[];
-  selectedFiles: any[] = [];
-  id=0
-  title: string='';
-  content: string='';
-  pictures: images[]=[];
-  delete:number[]=[];
-  userId:number=0;
-  editMode=false;
+
+deletePicture(i:number,id: number) {
+  if(!this.checkedValues[i]){
+    this.delete.push(id);
+  }
+  else{
+    this.delete=this.delete.filter(b=>b!=id);
+  }
+  console.log(this.delete);
+}
+
+postaviOglas() {
+    const formData=new FormData();
+    formData.append("title",this.title);
+    formData.append("content",this.content);
+    formData.append("userId",this.userId.toString());
+    console.log(this.id);
+    formData.append("id",this.id.toString());
+    for (let i = 0; i < this.selectedFiles.length; i++) {
+      formData.append("files",this.selectedFiles[i].file);
+    }
+    for (let i = 0; i < this.delete.length; i++) {
+      formData.append("deletedImages",this.delete[i].toString());
+    }
+    if(!this.editMode){
+      this.store.dispatch(addCampground({formData:formData}));
+    }
+    else{
+      this.store.dispatch(updateCampground({formData:formData}));
+    }
+    this.dialogRef.close();
+  }
+  
   autoGrow(event: Event): void {
     const textarea = event.target as HTMLTextAreaElement;
     textarea.style.height = 'auto';
