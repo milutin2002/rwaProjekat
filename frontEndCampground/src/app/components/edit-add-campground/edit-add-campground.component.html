@@ -13,6 +13,17 @@
   </mat-form-field>
 </div>
 
+  <google-map
+  [height]="'400px'"
+  [width]="'100%'"
+  [zoom]="zoom"
+  [center]="{lat: latitude, lng: longitude}"
+  (mapClick)="onMapClick($event)">
+  <map-marker
+    [position]="{lat: latitude, lng: longitude}">
+  </map-marker>
+</google-map>
+
 <div class="add-image-button">
   <button mat-raised-button class="dugmeZaSliku" (click)="fileInput.click()">
     Dodajte slike

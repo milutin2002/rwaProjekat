@@ -1,17 +1,21 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { AppState } from '../../app.state';
 import { Store } from '@ngrx/store';
 import { addCampground, updateCampground } from '../../store/campground/campground.action';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { campground } from '../../../models/campground';
 import { images } from '../../../models/images';
+import { GoogleMapsService } from '../../../service/google-maps.service';
 
 @Component({
   selector: 'app-edit-add-campground',
   templateUrl: './edit-add-campground.component.html',
   styleUrl: './edit-add-campground.component.css'
 })
-export class EditAddCampgroundComponent {
+export class EditAddCampgroundComponent implements OnInit {
+  latitude = 45.267136;
+  longitude = 19.833549;
+  zoom = 8;
   checkedValues:boolean[]=[];
   selectedFiles: any[] = [];
   id=0
@@ -22,7 +26,7 @@ export class EditAddCampgroundComponent {
   userId:number=0;
   editMode=false;
 
-  constructor(private store:Store<AppState>,public dialogRef: MatDialogRef<EditAddCampgroundComponent>,@Inject(MAT_DIALOG_DATA) public data:campground | null){
+  constructor(private store:Store<AppState>,public dialogRef: MatDialogRef<EditAddCampgroundComponent>,@Inject(MAT_DIALOG_DATA) public data:campground | null,private googleMapService:GoogleMapsService){
     if(data){
       this.editMode=true;
       this.id=data.id;
@@ -34,6 +38,9 @@ export class EditAddCampgroundComponent {
         this.checkedValues.push(false);
       }
     }
+  }
+  ngOnInit(): void {
+    this.googleMapService.loadGoogleMaps();
   }
 
 deletePicture(i:number,id: number) {
@@ -88,6 +95,13 @@ postaviOglas() {
           this.selectedFiles.push({ file, url: e.target.result });
       };
       reader.readAsDataURL(file);
+    }
+  }
+
+  onMapClick(event: google.maps.MapMouseEvent) {
+    if(event.latLng){
+      this.latitude = event.latLng.lat();
+      this.longitude = event.latLng.lng();
     }
   }
 }

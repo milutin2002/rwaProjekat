@@ -6,7 +6,8 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 .pnpm-debug.log*
-
+src/environments/environment.ts
+src/environments/environment.prod.ts
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 src/public
@@ -129,3 +130,5 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+frontEndCampground/src/environments/environment.ts
+frontEndCampground/src/environments/environment.prod.ts

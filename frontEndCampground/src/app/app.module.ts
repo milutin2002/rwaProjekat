@@ -39,6 +39,9 @@ import { CommentEffects } from './store/comment/comment.effect';
 import { CommentListComponent } from './components/comment-list/comment-list.component';
 import { HeaderToolbarComponent } from './components/header-toolbar/header-toolbar.component';
 import {MatToolbarModule} from '@angular/material/toolbar'; 
+import { environment } from '../environments/environment';
+import { GoogleMapsModule } from '@angular/google-maps';
+
 @NgModule({
   declarations: [
     AppComponent,CampgroundsPostsComponent,CampgroundPostComponent, CampgroundPartComponent, RegisterComponent, LoginComponent, MainPageComponent, EditUserProfileComponent, EditAddCampgroundComponent, CommentComponent, CommentListComponent, HeaderToolbarComponent],
@@ -46,8 +49,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     BrowserModule,
     AppRoutingModule,HttpClientModule,StoreModule.forRoot<AppState>({campgrounds:campgroundReducer,user:userReducer,comment:commentReducer}),StoreDevtoolsModule.instrument({
       maxAge:25
-    }),EffectsModule.forRoot([CampgroundEffects,UserEffects,CommentEffects]),MatCardModule,MatFormFieldModule,MatDividerModule,FormsModule,MatInputModule,MatButtonModule,ReactiveFormsModule,BrowserAnimationsModule,MatDialogModule,NgxStarRatingModule,FontAwesomeModule,MatCardModule,MatToolbarModule
-  ],
+    }),EffectsModule.forRoot([CampgroundEffects,UserEffects,CommentEffects]),MatCardModule,MatFormFieldModule,MatDividerModule,FormsModule,MatInputModule,MatButtonModule,ReactiveFormsModule,BrowserAnimationsModule,MatDialogModule,NgxStarRatingModule,FontAwesomeModule,MatCardModule,MatToolbarModule,
+    GoogleMapsModule ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
