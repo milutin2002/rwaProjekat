@@ -13,8 +13,8 @@ import { GoogleMapsService } from '../../../service/google-maps.service';
   styleUrl: './edit-add-campground.component.css'
 })
 export class EditAddCampgroundComponent implements OnInit {
-  latitude = 45.267136;
-  longitude = 19.833549;
+  latitude:number = 45.267136;
+  longitude:number = 19.833549;
   zoom = 8;
   checkedValues:boolean[]=[];
   selectedFiles: any[] = [];
@@ -58,6 +58,8 @@ postaviOglas() {
     formData.append("title",this.title);
     formData.append("content",this.content);
     formData.append("userId",this.userId.toString());
+    formData.append("latitude",this.latitude.toString());
+    formData.append("longitude",this.longitude.toString());
     console.log(this.id);
     formData.append("id",this.id.toString());
     for (let i = 0; i < this.selectedFiles.length; i++) {

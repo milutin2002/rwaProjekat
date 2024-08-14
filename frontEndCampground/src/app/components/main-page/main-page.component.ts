@@ -48,10 +48,10 @@ export class MainPageComponent implements OnInit{
   }
 
   addDialog() {
-    this.dialog.open(EditAddCampgroundComponent,{data:null});
+    this.dialog.open(EditAddCampgroundComponent,{data:null,panelClass: 'scrollable-dialog'});
   }
 
   openDialog(){
-    this.dialog.open(EditUserProfileComponent,{data:{...this.user}});
+    this.dialog.open(EditUserProfileComponent,{data:{...this.user,panelClass: 'scrollable-dialog'}});
   }
 }

@@ -11,5 +11,14 @@
         <h2>{{ campground.title }}</h2>
         <mat-divider></mat-divider>
         <p class="oglas-content">{{ campground.content }}</p>
+        <div *ngIf="campground.latitude && campground.longitude" class="map-container">
+          <google-map
+            [height]="'400px'"
+            [width]="'100%'"
+            [center]="{ lat: +campground.latitude, lng: +campground.longitude }"
+            [zoom]="12">
+            <map-marker [position]="{ lat: +campground.latitude, lng: +campground.longitude }"></map-marker>
+          </google-map>
+        </div>
         <app-comment [campgroundId]="campground.id"></app-comment>
         <app-comment-list></app-comment-list>

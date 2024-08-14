@@ -11,6 +11,10 @@ export class campground{
     title:string;
     @Column()
     content:string;
+    @Column("float")
+    latitude:number
+    @Column("float")
+    longitude:number
     @Column("int", { nullable: true })
     userId: number;
     @ManyToOne(()=>user,(user)=>user.campgrounds)

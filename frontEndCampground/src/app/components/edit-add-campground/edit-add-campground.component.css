@@ -4,8 +4,7 @@ mat-form-field {
   
   mat-dialog-content {
     width: 400px;
-    max-height: calc(100vh - 300px);
-    overflow-y: auto;
+    overflow-y: auto
   }
   
   .dugme {

@@ -24,7 +24,8 @@ export class CampgroundController {
     @UseInterceptors(FilesInterceptor('files',6,multerOptions))
     @Post()
     public async createCampground(@Body()campgroundDto:campgroundDto,@Request() req,@UploadedFiles() files: Array<Express.Multer.File>){
-        const campgroundAdd:campground=await this.service.addCampground(campgroundDto,req.user.id);
+        const campgroundAdd:campground=await this.service.addCampground({...campgroundDto,latitude: parseFloat(campgroundDto.latitude),
+            longitude: parseFloat(campgroundDto.longitude)},req.user.id);
         const images=await this.imageServie.saveImages(files,campgroundAdd.id);
         campgroundAdd.images=images;
         return campgroundAdd;

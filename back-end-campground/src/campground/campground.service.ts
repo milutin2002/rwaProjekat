@@ -30,7 +30,7 @@ export class CampgroundService {
     const res=await this.campgroundRepository.findOneBy({"id":id});
     return res;
   }
-  public async addCampground(campgroundDto:campgroundDto,id:number){
+  public async addCampground(campgroundDto:Omit<campgroundDto, 'latitude' | 'longitude'> & { latitude: number; longitude: number },id:number){
     const campgroundAdd=this.campgroundRepository.create(campgroundDto);
     campgroundAdd.userId=id;
     return await this.campgroundRepository.save(campgroundAdd);
