@@ -34,6 +34,8 @@ export class EditAddCampgroundComponent implements OnInit {
       this.content=data.content;
       this.userId=data.userId;
       this.pictures=data.images;
+      this.latitude=data.latitude;
+      this.longitude=data.longitude;
       for (let i = 0; i < this.pictures.length; i++) {
         this.checkedValues.push(false);
       }

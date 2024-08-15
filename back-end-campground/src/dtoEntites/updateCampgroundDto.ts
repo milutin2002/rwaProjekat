@@ -14,6 +14,12 @@ export class updateCampgroundDto {
   
     @IsInt()
     id: string;
+
+    @IsString()
+    latitude:string
+
+    @IsString()
+    longitude:string
   
     @IsOptional()
     deletedImages?: string[] | string;
