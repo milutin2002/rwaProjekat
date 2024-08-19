@@ -6,6 +6,7 @@ import * as CommentActions from '../../store/comment/comment.action';
 import { comment } from '../../../models/comment';
 import { selectCommentUserComment } from '../../store/comment/comment.selection';
 import { user } from '../../../models/user';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
@@ -18,6 +19,7 @@ u:user | null=null;
 content:string= '';
 rating:number=0;
 faStar = faStar;
+isLoggedIn:boolean=false;
 @Input()campgroundId:number=0;
 
 ngOnChanges(changes: SimpleChanges): void {
@@ -26,13 +28,17 @@ ngOnChanges(changes: SimpleChanges): void {
       this.rating=0;
 }
 
-constructor(private store:Store<AppState>){
+constructor(private store:Store<AppState>,private route:Router){
     this.editMode=false;
     this.store.select(selectCommentUserComment).subscribe(c=>{
-      console.log("Doslo je do promene");
-      console.log(c);
       this.c=c.userComment;
       this.u=c.user;
+      if(this.u){
+        this.isLoggedIn=true;
+      }
+      else{
+        this.isLoggedIn=false;
+      }
     });
   }
 
@@ -53,6 +59,10 @@ setRating(rate: number) {
 }
 
 onSubmit() {
+  if(!this.isLoggedIn){
+      this.route.navigate(["/"]);
+      return;
+  }
   if(!this.editMode){
     this.store.dispatch(CommentActions.addComment({comment:{campgroundId:this.campgroundId,content:this.content,rating:this.rating}}));
   }

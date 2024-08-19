@@ -17,8 +17,7 @@ export class CommentService {
         savedComment.user={id:user.id,username:user.username,password:'',profilePicture:user.profilePicture,campgrounds:[],comments:[]};
         return savedComment;
     }
-    public async getComments(campgroundId:number,userId:number){
-        const userComments=await this.commentRepository.findOneBy({userId:userId,campgroundId:campgroundId});
+    public async getComments(campgroundId:number){
         const comments=await this.commentRepository.find({where:{campgroundId:campgroundId},relations:{
             user:true
         }});

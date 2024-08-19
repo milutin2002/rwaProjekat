@@ -62,7 +62,6 @@ postaviOglas() {
     formData.append("userId",this.userId.toString());
     formData.append("latitude",this.latitude.toString());
     formData.append("longitude",this.longitude.toString());
-    console.log(this.id);
     formData.append("id",this.id.toString());
     for (let i = 0; i < this.selectedFiles.length; i++) {
       formData.append("files",this.selectedFiles[i].file);

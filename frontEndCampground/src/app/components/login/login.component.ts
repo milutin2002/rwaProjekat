@@ -17,7 +17,7 @@ constructor(private userService:UserService,private router:Router){
 login() {
   this.userService.login({username:this.username,password:this.password}).subscribe(x=>{
       localStorage.setItem("jwtToken","Bearer "+x.access_token);
-      this.router.navigate(['main/admin']);
+      this.router.navigate(['main/campgrounds']);
   },error =>{
     alert("Doslo je do greske prilikom logovanja");
   })

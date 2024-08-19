@@ -16,10 +16,13 @@ import { UserService } from '../../../service/user-service.service';
 export class EditUserProfileComponent implements AfterViewInit {
 selectedFile: any;
 doubleUsername:boolean=false;
+oldUsername='';
 constructor(
   public dialogRef: MatDialogRef<MainPageComponent>,
   @Inject(MAT_DIALOG_DATA) public data: user,private store:Store<AppState>,private service:UserService
-) {}
+) {
+  this.oldUsername=data.username;
+}
 
 ngAfterViewInit(): void {
   var doc=document.getElementsByClassName('username');
@@ -31,7 +34,7 @@ ngAfterViewInit(): void {
 }
 
 isValid():boolean{
-  return this.doubleUsername;
+  return !this.doubleUsername && this.oldUsername!==this.data.username;
 }
 closeDialog() {
   this.dialogRef.close();

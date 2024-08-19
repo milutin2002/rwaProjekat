@@ -14,5 +14,5 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-raised-button (click)="closeDialog()" color="accent">Izađite</button>
-    <button mat-raised-button (click)="editujProfil()" [disabled]="!isValid()" class="save">Sačuvajte promene</button>
+    <button mat-raised-button (click)="editujProfil()" [disabled]="isValid()" class="save">Sačuvajte promene</button>
 </mat-dialog-actions>

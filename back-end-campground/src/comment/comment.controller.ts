@@ -7,10 +7,9 @@ import {comment} from '../models/comment';
 @Controller('comment')
 export class CommentController {
     constructor(private commentService:CommentService){}
-    @UseGuards(JwtAuthGuard)
     @Get(":id")
-    getComments( @Param('id',ParseIntPipe)id:number,@Request()req){
-        return this.commentService.getComments(id,req.user.id);
+    getComments( @Param('id',ParseIntPipe)id:number){
+        return this.commentService.getComments(id);
     }
     @UseGuards(JwtAuthGuard)
     @Post()

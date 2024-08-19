@@ -49,7 +49,6 @@ export class RegisterComponent implements AfterViewInit{
 
   navigateToNext() {
     this.service.register({username:this.username,password:this.pas}).subscribe((u)=>{
-      console.log(u);
       this.router.navigate(["/"]);
     })
   }

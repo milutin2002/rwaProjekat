@@ -44,6 +44,9 @@ export class MainPageComponent implements OnInit{
           this.store.dispatch(loadCampgrounds({admin:""}));
         }
       }
+      else{
+        this.store.dispatch(loadCampgrounds({admin:""}));
+      }
     })
   }
 

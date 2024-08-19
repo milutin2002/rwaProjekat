@@ -15,7 +15,7 @@ export class NoAuthGuard implements CanActivate {
     const expectedRoles = next.data['expectedRoles'] as string[];
     const hasToken=this.userService.getToken();
     if (hasToken) {
-      this.router.navigate(['/main']);
+      this.router.navigate(['/main/campgrounds']);
     }
     return hasToken==null;
   }

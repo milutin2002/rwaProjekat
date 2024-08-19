@@ -21,8 +21,6 @@ export class CampgroundsPostsComponent {
   }
   
   select(campgroundSelected:number){
-    console.log("Poslao sam id");
-    console.log(campgroundSelected);
     this.store.dispatch(selectCampgrounds({campground:campgroundSelected}));
   }
 }
