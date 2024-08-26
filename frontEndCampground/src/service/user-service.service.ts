@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { userDto } from '../dtoEntities/userDto';
-import { Observable } from 'rxjs';
+import { from, map, Observable } from 'rxjs';
 import { user } from '../models/user';
 
 @Injectable({
@@ -32,6 +32,6 @@ export class UserService{
     return this.httpClient.put<user>("http://localhost:3000/users",data);
   }
   doubleUsername(username:string):Observable<boolean>{
-      return this.httpClient.get<boolean>("http://localhost:3000/users/"+username);
+      return from(fetch("http://localhost:3000/users/"+username).then(res=>res.json()));
   }
 }

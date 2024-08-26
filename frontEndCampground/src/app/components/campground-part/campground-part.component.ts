@@ -22,6 +22,7 @@ constructor(private store:Store<AppState>,private googleMapService:GoogleMapsSer
 ngOnInit(): void {
   this.store.select(selectCampgroundObject).subscribe(x=>{
     this.campground=x.selected;
+    this.currentSlideIndex=0;
   });
   this.googleMapService.loadGoogleMaps();
 }
