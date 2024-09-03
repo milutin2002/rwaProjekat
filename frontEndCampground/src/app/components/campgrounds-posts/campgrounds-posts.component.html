@@ -9,4 +9,7 @@
       <app-campground-post [campground]="campground" (campgroundIdEmitter)="select($event)"></app-campground-post>
      </ng-container>
    </ul>
+   <mat-paginator  [length]= "totalPosts" [pageSize]= "pageSize"  
+   [pageSizeOptions]= "pageSizeOption" (page)= "onChangedPage($event)">  
+   </mat-paginator>  
  </mat-card-content>

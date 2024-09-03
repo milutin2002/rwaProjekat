@@ -10,7 +10,7 @@ export class CampgroundEffects{
     constructor(private actions$:Actions,private campgroundService:CampgroundService,private commentService:CommentService){
 
     }
-    loadCampgrounds=createEffect(()=>this.actions$.pipe(ofType(CampgroundActions.loadCampgrounds),mergeMap((a)=>this.campgroundService.getCampgrounds(a.admin).pipe(map((camps)=>CampgroundActions.loadCampgroundsSuccess({campgrounds:camps}))))))
+    loadCampgrounds=createEffect(()=>this.actions$.pipe(ofType(CampgroundActions.loadCampgrounds),mergeMap((a)=>this.campgroundService.getCampgrounds(a.admin,a.page,a.pageSize).pipe(map((camps)=>CampgroundActions.loadCampgroundsSuccess({campgrounds:camps}))))))
     addCampground=createEffect(()=>this.actions$.pipe(ofType(CampgroundActions.addCampground),mergeMap((d)=>this.campgroundService.addCampground(d.formData).pipe(map((camp)=>CampgroundActions.addCampgroundSuccess({campground:camp}))))))
     deleteCampground=createEffect(()=>this.actions$.pipe(ofType(CampgroundActions.deleteCampground),mergeMap((d)=>this.campgroundService.deleteCampground(d.id).pipe(map(id=>CampgroundActions.deleteCampgroundSuccess({id:id}))))))
     updateCampground=createEffect(()=>this.actions$.pipe(ofType(CampgroundActions.updateCampground),filter(d=>{

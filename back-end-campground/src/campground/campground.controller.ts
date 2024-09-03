@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Request, UnauthorizedException, UploadedFiles, UseGuards, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Query, Request, UnauthorizedException, UploadedFiles, UseGuards, UseInterceptors } from '@nestjs/common';
 import { campgroundDto } from 'src/dtoEntites/campgroundDto';
 import { campground } from 'src/models/campground';
 import { CampgroundService } from './campground.service';
@@ -12,13 +12,13 @@ import { updateCampgroundDto } from 'src/dtoEntites/updateCampgroundDto';
 export class CampgroundController {
     constructor(private service:CampgroundService,private imageServie:ImageService){}
     @Get("")
-    public getCampgrounds(){
-        return this.service.getCampgrounds();
+    public getCampgrounds(@Query("page",ParseIntPipe)page:number=0,@Query("pageSize",ParseIntPipe)pageSize:number=5){
+        return this.service.getCampgrounds(page,pageSize);
     }
     @UseGuards(JwtAuthGuard)
     @Get("myCampgrounds")
-    public getCampgroundById(@Request()req){
-        return this.service.getCampgroundByUserId(req.user.id);
+    public getCampgroundById(@Request()req,@Query("page",ParseIntPipe)page:number=0,@Query("pageSize",ParseIntPipe)pageSize:number=5){
+        return this.service.getCampgroundByUserId(req.user.id,page,pageSize);
     }
     @UseGuards(JwtAuthGuard)
     @UseInterceptors(FilesInterceptor('files',6,multerOptions))

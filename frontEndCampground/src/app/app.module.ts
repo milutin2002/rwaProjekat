@@ -38,12 +38,13 @@ import { CommentListComponent } from './components/comment-list/comment-list.com
 import { HeaderToolbarComponent } from './components/header-toolbar/header-toolbar.component';
 import {MatToolbarModule} from '@angular/material/toolbar'; 
 import { GoogleMapsModule } from '@angular/google-maps';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
     AppComponent,CampgroundsPostsComponent,CampgroundPostComponent, CampgroundPartComponent, RegisterComponent, LoginComponent, MainPageComponent, EditUserProfileComponent, EditAddCampgroundComponent, CommentComponent, CommentListComponent, HeaderToolbarComponent],
   imports: [
-    BrowserModule,
+    BrowserModule,MatPaginatorModule,
     AppRoutingModule,HttpClientModule,StoreModule.forRoot<AppState>({campgrounds:campgroundReducer,user:userReducer,comment:commentReducer}),StoreDevtoolsModule.instrument({
       maxAge:25
     }),EffectsModule.forRoot([CampgroundEffects,UserEffects,CommentEffects]),MatCardModule,MatFormFieldModule,MatDividerModule,FormsModule,MatInputModule,MatButtonModule,ReactiveFormsModule,BrowserAnimationsModule,MatDialogModule,NgxStarRatingModule,FontAwesomeModule,MatCardModule,MatToolbarModule,

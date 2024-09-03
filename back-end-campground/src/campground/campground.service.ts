@@ -15,15 +15,15 @@ import { Repository } from 'typeorm';
 export class CampgroundService {
   
   constructor(@InjectRepository(campground) private campgroundRepository:Repository<campground>,private imageService:ImageService,private commentService:CommentService){}
-  getCampgrounds(){
-    return this.campgroundRepository.find({relations:{images:true}});
+  getCampgrounds(page:number,pageSize:number){
+    return this.campgroundRepository.find({relations:{images:true},skip:page*pageSize,take:pageSize});
   }
-  public async getCampgroundByUserId(id:number){
+  public async getCampgroundByUserId(id:number,page:number,pageSize:number){
     const res=await this.campgroundRepository.find({relations:{
       images:true
     },where:{
       userId:id
-    }});
+    },skip:page*pageSize,take:pageSize});
     return res; 
   }
   public async getCampgroundById(id:number){

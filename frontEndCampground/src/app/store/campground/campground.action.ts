@@ -1,6 +1,6 @@
 import {createAction,props} from '@ngrx/store';
 import { campground } from '../../models/campground';
-export const loadCampgrounds=createAction("Load campgrounds",props<{admin:string}>());
+export const loadCampgrounds=createAction("Load campgrounds",props<{admin:string,page:number,pageSize:number}>());
 export const loadCampgroundsSuccess=createAction("Load campgrounds success",props<{campgrounds:campground[]}>());
 export const selectCampgrounds=createAction("Select campground",props<{campground:number}>());
 export const addCampground=createAction("Add campground",props<{formData:FormData}>());
