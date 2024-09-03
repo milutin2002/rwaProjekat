@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../../service/user-service.service';
 import { AppState } from '../../app.state';
 import { changeAdminPage, loadUser } from '../../store/user/user.action';
 import { selectUser } from '../../store/user/user.selection';
 import { Store } from '@ngrx/store';
-import { user } from '../../../models/user';
+import { user } from '../../models/user';
 import { MatDialog } from '@angular/material/dialog';
 import { EditUserProfileComponent } from '../edit-user-profile/edit-user-profile.component';
 import { EditAddCampgroundComponent } from '../edit-add-campground/edit-add-campground.component';

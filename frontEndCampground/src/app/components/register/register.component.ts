@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from '../../../service/user-service.service';
-import { debounce, debounceTime, filter, fromEvent, map, switchMap } from 'rxjs';
+import { UserService } from '../../service/user-service.service';
+import { debounceTime, filter, fromEvent, map, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -19,7 +19,7 @@ export class RegisterComponent implements AfterViewInit{
   usernameFormControl = new FormControl('', [Validators.required]);
 
   constructor(private router: Router,private service:UserService) {
-    
+      
   }
 
   ngAfterViewInit(): void {

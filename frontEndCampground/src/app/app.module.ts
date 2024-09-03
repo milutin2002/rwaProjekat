@@ -7,10 +7,10 @@ import { CampgroundsPostsComponent } from './components/campgrounds-posts/campgr
 import { CampgroundPostComponent } from './components/campground-post/campground-post.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
-import {CampgroundState, campgroundReducer} from './store/campground/campground.reduce';
+import { campgroundReducer} from './store/campground/campground.reduce';
 import { CampgroundPartComponent } from './components/campground-part/campground-part.component'
 import { AppState } from './app.state';
-import { StoreDevtools, StoreDevtoolsModule } from '@ngrx/store-devtools';
+import {  StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { CampgroundEffects } from './store/campground/campground.effect';
 import { RegisterComponent } from './components/register/register.component';
@@ -31,15 +31,12 @@ import {MatDialogModule, matDialogAnimations} from '@angular/material/dialog';
 import { EditAddCampgroundComponent } from './components/edit-add-campground/edit-add-campground.component';
 import { CommentComponent } from './components/comment/comment.component';
 import { NgxStarRatingModule } from 'ngx-star-rating';
-import { RatingModule } from 'ng-starrating';
-import { StarRatingModule } from 'angular-star-rating';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { commentReducer } from './store/comment/comment.reduce';
 import { CommentEffects } from './store/comment/comment.effect';
 import { CommentListComponent } from './components/comment-list/comment-list.component';
 import { HeaderToolbarComponent } from './components/header-toolbar/header-toolbar.component';
 import {MatToolbarModule} from '@angular/material/toolbar'; 
-import { environment } from '../environments/environment';
 import { GoogleMapsModule } from '@angular/google-maps';
 
 @NgModule({

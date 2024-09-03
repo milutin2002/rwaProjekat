@@ -3,9 +3,9 @@ import { AppState } from '../../app.state';
 import { Store } from '@ngrx/store';
 import { addCampground, updateCampground } from '../../store/campground/campground.action';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { campground } from '../../../models/campground';
-import { images } from '../../../models/images';
-import { GoogleMapsService } from '../../../service/google-maps.service';
+import { campground } from '../../models/campground';
+import { images } from '../../models/images';
+import { GoogleMapsService } from '../../service/google-maps.service';
 
 @Component({
   selector: 'app-edit-add-campground',

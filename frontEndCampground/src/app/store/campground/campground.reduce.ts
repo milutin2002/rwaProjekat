@@ -1,5 +1,5 @@
 import {createReducer,on, UPDATE} from '@ngrx/store';
-import { campground } from '../../../models/campground';
+import { campground } from '../../models/campground';
 import * as Actions from './campground.action';
 import { Action } from 'rxjs/internal/scheduler/Action';
 import { createEntityAdapter, EntityState } from '@ngrx/entity';
@@ -7,11 +7,6 @@ import { createEntityAdapter, EntityState } from '@ngrx/entity';
 export interface CampgroundState extends EntityState<campground>{
     selectCampground:number
 }
-export interface CampgroundStateOld{
-    campgrounds:campground[],
-    selectCampground:number | null,
-    deletedCampground:number | null
-};
 const adapter=createEntityAdapter<campground>();
 export const initialState:CampgroundState=adapter.getInitialState({
     selectCampground:0

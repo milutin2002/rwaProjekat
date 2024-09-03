@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { createEffect,Actions, ofType } from "@ngrx/effects";
 import * as UserActions from './user.action';
 import { map, mergeMap } from "rxjs";
-import { UserService } from "../../../service/user-service.service";
+import { UserService } from "../../service/user-service.service";
 @Injectable()
 export class UserEffects{
     constructor(private actions$:Actions,private userService:UserService){

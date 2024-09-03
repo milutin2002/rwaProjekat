@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { createEffect,Actions, ofType } from "@ngrx/effects";
 import * as CommentActions from './comment.action';
-import { CommentService } from "../../../service/comment.service";
+import { CommentService } from "../../service/comment.service";
 import { map, mergeMap } from "rxjs";
 
 @Injectable()

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { comment } from '../../../models/comment';
+import { comment } from '../../models/comment';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { AppState } from '../../app.state';
 import { Store } from '@ngrx/store';

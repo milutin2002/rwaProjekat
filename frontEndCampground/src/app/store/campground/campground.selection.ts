@@ -1,6 +1,6 @@
 import { createSelector } from "@ngrx/store";
 import { AppState } from "../../app.state";
-import { campground } from "../../../models/campground";
+import { campground } from "../../models/campground";
 
 export const selectCampgroundFeature=createSelector((state:AppState)=>state.campgrounds,(campgrounds)=>campgrounds);
 export const selectCampgroundList=createSelector(selectCampgroundFeature,(campground)=>campground.ids.map(x=><campground>campground.entities[x]));

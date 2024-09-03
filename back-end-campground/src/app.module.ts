@@ -28,7 +28,7 @@ import { ImageService } from './image/image.service';
     imports: [ConfigModule],
     inject: [ConfigService],
     useFactory: typeOrmConfig,
-  }),TypeOrmModule.forFeature([campground,user,comment,image]),ConfigModule.forRoot(), AuthModule, UsersModule,ServeStaticModule.forRoot({rootPath: join(__dirname, '..', 'public')}),MulterModule.register({dest:"../public"})],
+  }),TypeOrmModule.forFeature([campground,user,comment,image]), AuthModule, UsersModule,ServeStaticModule.forRoot({rootPath: join(__dirname, '..', 'public')}),MulterModule.register({dest:"../public"})],
   controllers: [AppController, CampgroundController, CommentController],
   providers: [AppService,CampgroundService,UsersService, CommentService, ImageService],
 })

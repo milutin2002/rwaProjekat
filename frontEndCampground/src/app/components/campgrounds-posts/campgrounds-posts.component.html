@@ -6,7 +6,7 @@
 <mat-card-content>
    <ul>
      <ng-container *ngFor="let campground of campgrounds$ | async">
-      <app-campground-post [campground]="campground"></app-campground-post>
+      <app-campground-post [campground]="campground" (campgroundIdEmitter)="select($event)"></app-campground-post>
      </ng-container>
    </ul>
  </mat-card-content>

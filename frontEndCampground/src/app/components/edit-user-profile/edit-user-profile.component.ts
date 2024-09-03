@@ -1,12 +1,12 @@
 import { AfterViewInit, Component, Inject } from '@angular/core';
 import { MainPageComponent } from '../main-page/main-page.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { user } from '../../../models/user';
+import { user } from '../../models/user';
 import { AppState } from '../../app.state';
 import { Store } from '@ngrx/store';
 import { updateUser } from '../../store/user/user.action';
 import { debounceTime, filter, fromEvent, map, switchMap } from 'rxjs';
-import { UserService } from '../../../service/user-service.service';
+import { UserService } from '../../service/user-service.service';
 
 @Component({
   selector: 'app-edit-user-profile',

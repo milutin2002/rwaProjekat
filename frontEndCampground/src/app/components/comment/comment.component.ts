@@ -3,10 +3,10 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { AppState } from '../../app.state';
 import { Store } from '@ngrx/store';
 import * as CommentActions from '../../store/comment/comment.action';
-import { comment } from '../../../models/comment';
+import { comment } from '../../models/comment';
 import { selectCommentUserComment } from '../../store/comment/comment.selection';
-import { user } from '../../../models/user';
-import { ActivatedRoute, Router } from '@angular/router';
+import { user } from '../../models/user';
+import {  Router } from '@angular/router';
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',

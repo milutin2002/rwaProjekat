@@ -1,5 +1,5 @@
 import { createEntityAdapter, EntityState } from "@ngrx/entity";
-import { comment } from "../../../models/comment";
+import { comment } from "../../models/comment";
 import { createReducer, on } from "@ngrx/store";
 import * as CommentActions from './comment.action';
 

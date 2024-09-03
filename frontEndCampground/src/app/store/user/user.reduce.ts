@@ -1,9 +1,9 @@
 import {createReducer,on} from '@ngrx/store';
-import { campground } from '../../../models/campground';
+import { campground } from '../../models/campground';
 import * as Actions from './user.action';
 import { Action } from 'rxjs/internal/scheduler/Action';
 import { createEntityAdapter, EntityState } from '@ngrx/entity';
-import { user } from '../../../models/user';
+import { user } from '../../models/user';
 
 export interface UserState{
     user:user | null,

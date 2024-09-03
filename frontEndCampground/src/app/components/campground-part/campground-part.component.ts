@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { campground } from '../../../models/campground';
-import {CampgroundState} from '../../store/campground/campground.reduce'
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { campground } from '../../models/campground';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../app.state';
 import { selectCampgrounds } from '../../store/campground/campground.action';
 import { selectCampgroundObject } from '../../store/campground/campground.selection';
-import { GoogleMapsService } from '../../../service/google-maps.service';
+import { GoogleMapsService } from '../../service/google-maps.service';
 @Component({
   selector: 'app-campground-part',
   templateUrl: './campground-part.component.html',

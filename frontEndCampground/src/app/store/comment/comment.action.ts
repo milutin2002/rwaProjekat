@@ -1,6 +1,6 @@
 import {createAction,props} from '@ngrx/store';
-import { commentDto } from '../../../dtoEntities/commentDto';
-import { comment } from '../../../models/comment';
+import { commentDto } from '../../dtoEntities/commentDto';
+import { comment } from '../../models/comment';
 
 export const addComment=createAction("Add comment",props<{comment:commentDto}>());
 export const updateComment=createAction("Update comment",props<{comment:comment}>());

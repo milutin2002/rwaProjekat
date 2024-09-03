@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
-import { CampgroundService } from '../../../service/campground.service';
-import { campground } from '../../../models/campground';
+import { campground } from '../../models/campground';
 import { Observable, of } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { CampgroundState } from '../../store/campground/campground.reduce';
-import { loadCampgrounds, selectCampgrounds } from '../../store/campground/campground.action';
+import {  selectCampgrounds } from '../../store/campground/campground.action';
 import { selectCampgroundList } from '../../store/campground/campground.selection';
 import { AppState } from '../../app.state';
 
@@ -16,7 +14,7 @@ import { AppState } from '../../app.state';
 export class CampgroundsPostsComponent {
   campgrounds$:Observable<campground[]>=of([]);
   
-  constructor(private service:CampgroundService,private store:Store<AppState>){
+  constructor(private store:Store<AppState>){
     this.campgrounds$=this.store.select(selectCampgroundList);
   }
   

@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import { createEffect,Actions, ofType } from "@ngrx/effects";
 import * as CampgroundActions from './campground.action';
 import { catchError, filter, map, mergeMap, of } from "rxjs";
-import { CampgroundService } from "../../../service/campground.service";
-import {CommentService} from '../../../service/comment.service';
+import { CampgroundService } from "../../service/campground.service";
+import {CommentService} from '../../service/comment.service';
 import * as CommentActions from '../comment/comment.action';
 @Injectable()
 export class CampgroundEffects{
