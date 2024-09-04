@@ -11,8 +11,8 @@ export class CampgroundService {
   constructor(private httpClient:HttpClient) {
 
    }
-  getCampgrounds(path:string,page:number,pageSize:number):Observable<campground[]>{
-    return this.httpClient.get<campground[]>("http://localhost:3000/campgrounds/"+path+"?page="+page+"&pageSize="+pageSize);
+  getCampgrounds(path:string,page:number,pageSize:number,search:string):Observable<campground[]>{
+    return this.httpClient.get<campground[]>("http://localhost:3000/campgrounds/"+path+"?page="+page+"&pageSize="+pageSize+"&search="+search);
   }
   addCampground(formData:FormData):Observable<campground>{
     return this.httpClient.post<campground>("http://localhost:3000/campgrounds/",formData);

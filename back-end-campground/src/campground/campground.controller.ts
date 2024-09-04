@@ -12,13 +12,13 @@ import { updateCampgroundDto } from 'src/dtoEntites/updateCampgroundDto';
 export class CampgroundController {
     constructor(private service:CampgroundService,private imageServie:ImageService){}
     @Get("")
-    public getCampgrounds(@Query("page",ParseIntPipe)page:number=0,@Query("pageSize",ParseIntPipe)pageSize:number=5){
-        return this.service.getCampgrounds(page,pageSize);
+    public getCampgrounds(@Query("page",ParseIntPipe)page:number=0,@Query("pageSize",ParseIntPipe)pageSize:number=5,@Query("search")search:string){
+        return this.service.getCampgrounds(page,pageSize,search);
     }
     @UseGuards(JwtAuthGuard)
     @Get("myCampgrounds")
-    public getCampgroundById(@Request()req,@Query("page",ParseIntPipe)page:number=0,@Query("pageSize",ParseIntPipe)pageSize:number=5){
-        return this.service.getCampgroundByUserId(req.user.id,page,pageSize);
+    public getCampgroundById(@Request()req,@Query("page",ParseIntPipe)page:number=0,@Query("pageSize",ParseIntPipe)pageSize:number=5,@Query("search")search:string){
+        return this.service.getCampgroundByUserId(req.user.id,page,pageSize,search);
     }
     @UseGuards(JwtAuthGuard)
     @UseInterceptors(FilesInterceptor('files',6,multerOptions))

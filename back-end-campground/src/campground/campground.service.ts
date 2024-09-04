@@ -1,27 +1,27 @@
-
-import {Get, Injectable, Param, ParseIntPipe, UnauthorizedException} from '@nestjs/common'
+import { Injectable, UnauthorizedException} from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm';
-import { RelationshipType } from 'sequelize/types/errors/database/foreign-key-constraint-error';
 import { CommentService } from 'src/comment/comment.service';
 import { campgroundDto } from 'src/dtoEntites/campgroundDto';
 import { updateCampgroundDto } from 'src/dtoEntites/updateCampgroundDto';
 import { ImageService } from 'src/image/image.service';
 import { campground } from 'src/models/campground';
-import { image } from 'src/models/image';
-import { UsersService } from 'src/users/users.service';
-import { Repository } from 'typeorm';
+
+import { ILike, Repository } from 'typeorm';
 
 @Injectable()
 export class CampgroundService {
   
   constructor(@InjectRepository(campground) private campgroundRepository:Repository<campground>,private imageService:ImageService,private commentService:CommentService){}
-  getCampgrounds(page:number,pageSize:number){
-    return this.campgroundRepository.find({relations:{images:true},skip:page*pageSize,take:pageSize});
+  getCampgrounds(page:number,pageSize:number,search:string){
+    return this.campgroundRepository.find({relations:{images:true},where: {
+      title: ILike(`%${search}%`)
+    },skip:page*pageSize,take:pageSize});
   }
-  public async getCampgroundByUserId(id:number,page:number,pageSize:number){
+  public async getCampgroundByUserId(id:number,page:number,pageSize:number,search:string){
     const res=await this.campgroundRepository.find({relations:{
       images:true
     },where:{
+      title: ILike(`%${search}%`),
       userId:id
     },skip:page*pageSize,take:pageSize});
     return res; 

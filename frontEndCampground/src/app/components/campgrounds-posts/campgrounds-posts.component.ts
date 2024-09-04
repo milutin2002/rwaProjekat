@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { campground } from '../../models/campground';
-import { Observable, of } from 'rxjs';
+import { debounceTime, fromEvent, map, Observable, of } from 'rxjs';
 import { Store } from '@ngrx/store';
 import {  loadCampgrounds, selectCampgrounds } from '../../store/campground/campground.action';
 import { selectCampgroundList } from '../../store/campground/campground.selection';
@@ -13,9 +13,10 @@ import { selectPage } from '../../store/user/user.selection';
   templateUrl: './campgrounds-posts.component.html',
   styleUrl: './campgrounds-posts.component.scss'
 })
-export class CampgroundsPostsComponent {
+export class CampgroundsPostsComponent implements AfterViewInit {
   page:number=0;
-  pageSize:number=5
+  pageSize:number=5;
+  search='';
   pageSizeOption = [1,3,5,10];
   totalPosts:number=100;
   isAdminPage:boolean=true;
@@ -27,6 +28,19 @@ export class CampgroundsPostsComponent {
       this.isAdminPage=x;
     })
   }
+  ngAfterViewInit(): void {
+    var doc=document.getElementsByClassName('search');
+    if(doc){
+      fromEvent(doc,'input').pipe(debounceTime(500),map((ev:Event)=>(<HTMLInputElement>ev.target).value)).subscribe(x=>{
+        if(this.isAdminPage){
+          this.store.dispatch(loadCampgrounds({admin:"myCampgrounds",page:this.page,pageSize:this.pageSize,search:x}));
+        }
+        else{
+          this.store.dispatch(loadCampgrounds({admin:"",page:this.page,pageSize:this.pageSize,search:x}));
+        }
+      })
+    }
+  }
   
   select(campgroundSelected:number){
     this.store.dispatch(selectCampgrounds({campground:campgroundSelected}));
@@ -35,10 +49,10 @@ export class CampgroundsPostsComponent {
     this.page=pageData.pageIndex;
     this.pageSize=pageData.pageSize;
     if(!this.isAdminPage){
-    this.store.dispatch(loadCampgrounds({admin:"",page:this.page,pageSize:this.pageSize}));
+    this.store.dispatch(loadCampgrounds({admin:"",page:this.page,pageSize:this.pageSize,search:this.search}));
     }
     else{
-      this.store.dispatch(loadCampgrounds({admin:"myCampgrounds",page:this.page,pageSize:this.pageSize}));
+      this.store.dispatch(loadCampgrounds({admin:"myCampgrounds",page:this.page,pageSize:this.pageSize,search:this.search}));
     }
   } 
 }

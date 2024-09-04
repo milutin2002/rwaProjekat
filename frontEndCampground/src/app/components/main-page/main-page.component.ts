@@ -37,14 +37,14 @@ export class MainPageComponent implements OnInit{
         this.isAdmin=this.parmPath==="admin";
         this.store.dispatch(changeAdminPage({page:this.isAdmin}));
         if(this.isAdmin){
-          this.store.dispatch(loadCampgrounds({admin:"myCampgrounds",page:0,pageSize:5}));
+          this.store.dispatch(loadCampgrounds({admin:"myCampgrounds",page:0,pageSize:5,search:""}));
         }
         else{
-          this.store.dispatch(loadCampgrounds({admin:"",page:0,pageSize:5}));
+          this.store.dispatch(loadCampgrounds({admin:"",page:0,pageSize:5,search:""}));
         }
       }
       else{
-        this.store.dispatch(loadCampgrounds({admin:"",page:0,pageSize:5}));
+        this.store.dispatch(loadCampgrounds({admin:"",page:0,pageSize:5,search:""}));
       }
     })
   }

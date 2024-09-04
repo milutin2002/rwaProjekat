@@ -4,6 +4,9 @@
 </div>
 </div>-->
 <mat-card-content>
+  <mat-form-field>
+    <input matInput placeholder="Search campground" class="search" [(ngModel)]="search">
+  </mat-form-field>
    <ul>
      <ng-container *ngFor="let campground of campgrounds$ | async">
       <app-campground-post [campground]="campground" (campgroundIdEmitter)="select($event)"></app-campground-post>
