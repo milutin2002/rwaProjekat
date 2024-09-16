@@ -3,6 +3,7 @@ import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/c
 import { Observable } from 'rxjs';
 import { UserService } from '../service/user-service.service';
 
+
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
